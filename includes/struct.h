@@ -38,8 +38,9 @@ typedef struct	s_game
 	unsigned int	swidth;
 	unsigned int	sheight;
 	t_rules			rules;
-	float			delta_time;
 	bool			running;
+	float			time;
+	float			old_time;
 }				t_game;
 
 #endif

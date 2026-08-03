@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   initialise.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/03 13:06:41 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/03 18:16:43 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/03 18:34:47 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "render.h"
-#include "key.h"
+#include "initialise.h"
 
-int main(int argc, char *argv[])
+void	initialise_camera(t_game *game)
 {
-	t_game	game;
-	
-	initialise_game(&game);
 
-	// Parsing here, he define the map
-	
-	// Key hook here, he look the key, logic
-	
-	launch_ray(game);
-	
+}
 
+void	initialise_rules(t_game *game)
+{
+
+}
+
+void	initialise_map(t_game *game)
+{
+
+}
+
+void	initialise_game(t_game *game)
+{
+	initialise_camera(game->camera);
+	initialise_rules(game->camera);
+	initialise_map(game->camera);
 }

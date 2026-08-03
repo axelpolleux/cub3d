@@ -1,15 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_launch.c                                       :+:      :+:    :+:   */
+/*   launch_ray.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/03 14:59:51 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/03 17:58:38 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-void	launch_ray
+void	launch_ray(t_game game)
+{
+	int	ray_x;
+
+	ray_x = 0;
+	while (ray_x < game.screen_width)
+	{
+		
+	}
+}

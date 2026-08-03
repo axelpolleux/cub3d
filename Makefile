@@ -12,4 +12,7 @@ LDFLAGS =
 
 INCLUDES = includes
 
+include src/renderer/renderer.make
+include src/init/initialise.make
+
 include src/action.make
