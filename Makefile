@@ -1,34 +1,15 @@
-CC				:=	cc
-CFLAGS			:=	-Wall -Werror -Wextra -pthread -g
-NAME			:=	philo
+NAME = cub3D
 
-SRCS			:=	main.c		\
-					utils.c		\
-					philo.c		\
-					thread.c	\
-					parser.c	\
-					monitor.c	\
-					mutex.c
+OUTPUT_DIR = build
 
-OBJS			:=	$(SRCS:.c=.o)
+SRC_DIR = src
 
-all:		$(NAME)
+OUT_DIRS := $(OUTPUT_DIR)/$(SRC_DIR)
 
-$(NAME):	$(OBJS)
-	@printf "\n✔ BUILD COMPLETE\n"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+SRC = $(SRC_DIR)/main.c
 
-%.o:		%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+LDFLAGS =
 
-clean:
-	@echo "[CLEAN]"
-	@rm -rf $(OBJS)
+INCLUDES = includes
 
-fclean:		clean
-	@echo "[FCLEAN]"
-	@rm -rf $(NAME)
-
-re:			fclean all
-
-.PHONY:		all clean fclean re
+include src/action.make
