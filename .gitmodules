@@ -1,0 +1,6 @@
+[submodule "includes/MacroLibX"]
+	path = includes/MacroLibX
+	url = git@github.com:seekrs/MacroLibX.git
+[submodule "lib/MacroLibX"]
+	path = lib/MacroLibX
+	url = git@github.com:seekrs/MacroLibX.git
