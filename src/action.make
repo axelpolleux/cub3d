@@ -27,6 +27,9 @@ $(OUT_DIRS):
 
 all: $(NAME)
 
+macrolibx:
+    make -C $(MLX_DIR) -j
+
 clean:
 	@rm -rf $(OUTPUT_DIR)
 	@echo "CLEAN"
@@ -37,4 +40,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean all re fclean
+build: macrolibx all
+
+.PHONY: clean macrolibx all re build fclean
