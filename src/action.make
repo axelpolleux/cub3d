@@ -28,7 +28,7 @@ $(OUT_DIRS):
 all: $(NAME)
 
 macrolibx:
-    make -C $(MLX_DIR) -j
+	make -C $(MLX_DIR) -j
 
 clean:
 	@rm -rf $(OUTPUT_DIR)
