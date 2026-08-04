@@ -7,10 +7,11 @@ MLX_DIR		:= lib/MacroLibX
 
 SRC			:= $(SRC_DIR)/main.c
 
-LDFLAGS		:=
+LDFLAGS		:= -lm
 
-INCLUDES	:= includes -I$(MLX_DIR)/includes
+INCLUDES	:= -Iincludes -I$(MLX_DIR)/includes
 
 include		src/renderer/renderer.make
 include		src/init/initialise.make
+include		src/key/key.make
 include		src/action.make

@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_ray.c                                       :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/04 17:48:16 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/04 16:16:30 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "renderer.h"
+#include "key.h"
 
-void	launch_ray(t_game *game)
+void	keyup_hook(int keycode, void *game_ptr)
 {
-	int	ray_x;
+	t_game	*game;
 
-	ray_x = 0;
-	while (ray_x < game->screen.width)
-	{
-		launch_one_ray(ray_x, game);	
-		ray_x++;
-	}
+	game = (t_game *)game_ptr;
+	game->key_table[keycode] = 0;
+}
+
+void	keydown_hook(int keycode, void *game_ptr)
+{
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	game->key_table[keycode] = 1;
+}
+
+void	window_hook(int event, void *game_ptr)
+{
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	if (!event)
+		mlx_loop_end(game->screen.mlx);
 }

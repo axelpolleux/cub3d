@@ -15,11 +15,11 @@ endif
 OBJ = $(SRC:%.c=$(OUTPUT_DIR)/%.o)
 
 $(NAME): $(OUT_DIRS) $(OBJ)
-	@$(CC) $(OBJ) $(CFLAGS) -I$(INCLUDES) $(LFLAGS) -o $@
+	@$(CC) $(OBJ) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(MLX_DIR)/libmlx.so -lSDL2 -o $@
 	@echo "COMPILATION"
 
 $(OUTPUT_DIR)/%.o: %.c
-	@$(CC) $(CFLAGS) -I$(INCLUDES) $(LFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo -e "$< to $@\n"
 
 $(OUT_DIRS):
