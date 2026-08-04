@@ -6,25 +6,24 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:06:41 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/03 18:16:43 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/04 16:17:01 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "render.h"
-#include "key.h"
+#include "parser.h"
+#include "struct.h"
 
 int main(int argc, char *argv[])
 {
 	t_game	game;
-	
-	initialise_game(&game);
 
+	(void)game;
 	// Parsing here, he define the map
 	
 	// Key hook here, he look the key, logic
-	
-	launch_ray(game);
-	
+	if (!main_parser(argc, argv, &game))
+		return (1);
+	return (0);
+
 
 }
