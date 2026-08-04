@@ -10,17 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "renderer.h"
 #include "initialise.h"
 #include "key.h"
+#include "renderer.h"
 #include "struct.h"
 
 void bruteforce_map(t_game *game)
 {
 	game->map = (t_map){.width = 5, .height = 3};
 	game->map.content = malloc(3 * sizeof(int *));
-	for (int i = 0; i < 4; i++)
-	{
+	for (int i = 0; i < 3; i++) {
 		game->map.content[i] = malloc(5 * sizeof(int));
 	}
 	game->map.content[0][0] = WALL;
@@ -38,20 +37,18 @@ void bruteforce_map(t_game *game)
 	game->map.content[2][2] = WALL;
 	game->map.content[2][3] = WALL;
 	game->map.content[2][4] = WALL;
-	
-	for (int y = 0; y < 4; y++)
-	{
-		for (int x = 0; x < 6; x++)
-		{
+
+	for (int y = 0; y < 3; y++) {
+		for (int x = 0; x < 5; x++) {
 			printf("%d", game->map.content[y][x]);
 		}
 		printf("\n");
 	}
 }
 
-void	update(void *ptr_game)
+void update(void *ptr_game)
 {
-	t_game	*game;
+	t_game *game;
 
 	game = (t_game *)ptr_game;
 	launch_ray(game);
@@ -59,14 +56,26 @@ void	update(void *ptr_game)
 
 int main()
 {
-	t_game	game;
-	
+	t_game game;
+
 	bruteforce_map(&game);
 	initialise_game(&game);
 	mlx_add_loop_hook(game.screen.mlx, update, &game);
-	mlx_on_event(game.screen.mlx, game.screen.win, MLX_KEYDOWN, keydown_hook, &game);
-	mlx_on_event(game.screen.mlx, game.screen.win, MLX_KEYUP, keyup_hook, &game);
-	mlx_on_event(game.screen.mlx, game.screen.win, MLX_WINDOW_EVENT, window_hook, &game);
+	mlx_on_event(game.screen.mlx,
+				 game.screen.win,
+				 MLX_KEYDOWN,
+				 keydown_hook,
+				 &game);
+	mlx_on_event(game.screen.mlx,
+				 game.screen.win,
+				 MLX_KEYUP,
+				 keyup_hook,
+				 &game);
+	mlx_on_event(game.screen.mlx,
+				 game.screen.win,
+				 MLX_WINDOW_EVENT,
+				 window_hook,
+				 &game);
 	mlx_loop(game.screen.mlx);
 	return (0);
 }
