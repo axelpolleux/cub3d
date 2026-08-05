@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/04 17:12:46 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/05 19:57:41 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,28 @@ typedef struct s_ray
 	float	delta_dist_y;
 	float	perp_wall_dist;
 	float	line_height;
+	int		draw_start;
+	int		draw_end;
 	int		hit;
 	int		side;
 }	t_ray;
 
-typedef struct s_texture
+typedef struct s_image
+{
+	mlx_image	content;
+	int			width;
+	int			height;
+}	t_image;
+
+typedef struct s_textures
 {
 	mlx_color	ground_color;
 	mlx_color	sky_color;
-	mlx_image	north_face;
-	mlx_image	south_face;
-	mlx_image	west_face;
-	mlx_image	east_face;
-}	t_texture;
+	t_image		north_face;
+	t_image		south_face;
+	t_image		west_face;
+	t_image		east_face;
+}	t_textures;
 
 typedef struct s_screen
 {
@@ -94,7 +103,7 @@ typedef struct	s_game
 	int				old_time;
 	t_map			map;
 	t_rules			rules;
-	t_texture		textures;
+	t_textures		textures;
 	t_camera		camera;
 	t_screen		screen;
 }	t_game;

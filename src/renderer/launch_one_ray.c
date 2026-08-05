@@ -5,55 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/04 14:50:11 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 17:59:07 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/05 19:28:37 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/05 20:37:14 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-void	give_ray_color(t_ray *ray, mlx_color *color)
+void	give_ray_color(t_game *game, t_ray *ray)
 {
-	if (ray->side == 0 && ray->step_x < 0) // EAST FACE
-		color->rgba = 0x00FF00FF;
-	else if (ray->side == 0 && ray->step_x > 0) // WEST FACE
-		color->rgba = 0xFF0000FF;
-	else if (ray->side == 1 && ray->step_y < 0) // SOUTH FACE
-		color->rgba = 0x0000FFFF;
-	else if (ray->side == 1 && ray->step_y > 0) // NORTH FACE
-		color->rgba = 0xFFFF00FF;
+	float		wall_x;
+	t_image		image;
+	int			tex_x;
+	int			tex_y;
+	float		step;
+	float		tex_pos;
+	int			y;
+	mlx_color	color;
+
+	if (ray->side == 0 && ray->step_x < 0)
+		image = game->textures.south_face;
+	else if (ray->side == 0 && ray->step_x > 0)
+		image = game->textures.north_face;
+	else if (ray->side == 1 && ray->step_y < 0)
+		image = game->textures.east_face;
+	else if (ray->side == 1 && ray->step_y > 0)
+		image = game->textures.west_face;
+	if (ray->side == 0)
+		wall_x = game->camera.pos_y + ray->perp_wall_dist * ray->dir_y;
+	else
+		wall_x = game->camera.pos_x + ray->perp_wall_dist * ray->dir_x;
+	wall_x -= (int)floor(wall_x);
+	tex_x = (int)(wall_x * (float)image.width);
+	if (tex_x >= image.width)
+    	tex_x = image.width - 1;
+	if (ray->side == 0 && ray->dir_x > 0)
+		tex_x = image.width - tex_x - 1;
+	if (ray->side == 1 && ray->dir_y < 0)
+		tex_x = image.width - tex_x - 1;
+	step = 1.0 * image.height / ray->line_height;
+	tex_pos = (ray->draw_start - game->screen.height / 2 + ray->line_height / 2) * step;
+	y = ray->draw_start;
+	while (y < ray->draw_end)
+	{
+		tex_y = (int)tex_pos % image.height;
+		if (tex_y < 0)
+    		tex_y += image.height;
+		tex_pos += step;
+		color = mlx_get_image_pixel(game->screen.mlx, image.content, tex_x, tex_y);
+		mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x, y,
+			color);
+	}
 }
 
 void	draw_ray_wall(t_ray *ray, t_game *game)
 {
 	int			h;
-	int			draw_start;
-	int			draw_end;
 	mlx_color	color;
 	int			i;
 
 	h = game->screen.height;
 	ray->line_height = round(h / ray->perp_wall_dist);
-	draw_start = -1 * ray->line_height / 2 + h / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = ray->line_height / 2 + h / 2;
-	if (draw_end < 0)
-		draw_end = 0;
-	give_ray_color(ray, &color);
-	if (ray->hit)
+	ray->draw_start = -1 * ray->line_height / 2 + h / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + h / 2;
+	if (ray->draw_end < 0)
+		ray->draw_end = 0;
+	if (ray->hit == 1)
 	{
 		i = 0;
+		give_ray_color(game, ray);
 		while (i < game->screen.height)
 		{
-			if (i < draw_start)
-				color.rgba = 0x000000FF;
-			else if (i > draw_end)
-				color.rgba = 0xFFFFFFFF;
-			else
-				give_ray_color(ray, &color);
-			mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x,
-				i, color);
+			if (i < ray->draw_start)
+			{
+				color = game->textures.sky_color;
+				mlx_set_image_pixel(game->screen.mlx, game->screen.img,
+					ray->pos_x, i, color);
+			}
+			else if (i > ray->draw_end)
+			{
+				color = game->textures.ground_color;
+				mlx_set_image_pixel(game->screen.mlx, game->screen.img,
+					ray->pos_x, i, color);
+			}
 			i++;
 		}
 	}
@@ -76,8 +112,8 @@ void	ray_move(t_ray *ray, t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_x < 0 || game->map.width < ray->map_x || ray->map_y < 0
-			|| game->map.height < ray->map_y)
+		if ((ray->map_x < 0 || game->map.width <= ray->map_x) || (ray->map_y < 0
+			|| game->map.height <= ray->map_y))
 		{
 			if (ray->side_dist_x < ray->side_dist_y)
 				ray->map_x -= ray->step_x;

@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:06:41 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 17:27:32 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/05 20:27:06 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ void	bruteforce_map(t_game *game)
 	}
 }
 
+void	bruteforce_textures(char **argv, t_game *game)
+{
+	game->textures.north_face.content = mlx_new_image_from_file(game->screen.mlx, argv[1], NULL, NULL);
+	game->textures.north_face.width = 2000;
+	game->textures.north_face.height = 2000;
+	game->textures.south_face.content = mlx_new_image_from_file(game->screen.mlx, argv[2], NULL, NULL);
+	game->textures.south_face.width = 2000;
+	game->textures.south_face.height = 2000;
+	game->textures.east_face.content = mlx_new_image_from_file(game->screen.mlx, argv[3], NULL, NULL);
+	game->textures.east_face.width = 2000;
+	game->textures.east_face.height = 2000;
+	game->textures.west_face.content = mlx_new_image_from_file(game->screen.mlx, argv[4], NULL, NULL);
+	game->textures.west_face.width = 2000;
+	game->textures.west_face.height = 2000;
+	game->textures.sky_color.rgba = 0x000000FF;
+	game->textures.ground_color.rgba = 0xFFFFFFFF;
+}
+
 void	update(void *ptr_game)
 {
 	t_game	*game;
@@ -44,12 +62,16 @@ void	update(void *ptr_game)
 	key_escape(game);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	if (argc != 5)
+		return (1);
 	ft_bzero(&game, sizeof(t_game));
+	game.screen.mlx = mlx_init();
 	bruteforce_map(&game);
+	bruteforce_textures(argv, &game);
 	initialise_game(&game);
 	mlx_clear_window(game.screen.mlx, game.screen.win, (mlx_color)0u);
 	launch_ray(&game);
