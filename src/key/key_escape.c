@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_ray.c                                       :+:      :+:    :+:   */
+/*   key_escape.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 17:41:18 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/05 17:31:56 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/05 17:33:41 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "renderer.h"
+#include "key.h"
 
-void	launch_ray(t_game *game)
+void	key_escape(t_game *game)
 {
-	int	ray_x;
-
-	ray_x = 0;
-	while (ray_x < game->screen.width)
-	{
-		launch_one_ray(ray_x, game);
-		ray_x++;
-	}
+	if (game->key_table[KEY_ESCAPE])
+		mlx_loop_end(game->screen.mlx);
 }

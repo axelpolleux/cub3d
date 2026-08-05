@@ -15,7 +15,7 @@ endif
 OBJ = $(SRC:%.c=$(OUTPUT_DIR)/%.o)
 
 $(NAME): $(OUT_DIRS) $(OBJ)
-	@$(CC) $(OBJ) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(MLX_DIR)/libmlx.so -lSDL2 -o $@
+	@$(CC) $(OBJ) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.so -lSDL2 -o $@
 	@echo "COMPILATION"
 
 $(OUTPUT_DIR)/%.o: %.c
@@ -29,6 +29,9 @@ all: $(NAME)
 
 macrolibx:
 	make -C $(MLX_DIR) -j
+
+macrolibx:
+	make -C $(LIBFT_DIR) -j
 
 clean:
 	@rm -rf $(OUTPUT_DIR)

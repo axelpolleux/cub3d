@@ -1,67 +1,77 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::      ::::::::   */
-/*   key_move.c                                         +:      :+:    :+:   */
-/*                                                    ++ +:+         +:+     */
-/*   By lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                        :::      ::::::::   */
+/*   key_move.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created 2026/08/04 17:18:38 by lchamard          #+#    #+#             */
-/*   Updated 2026/08/04 17:31:19 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/05 18:18:30 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/05 18:19:40 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 
+static void	move_player(t_game *game, float move_x, float move_y)
+{
+	float	new_x;
+	float	new_y;
+	float	check_x;
+	float	check_y;
+
+	new_x = game->camera.pos_x + move_x;
+	new_y = game->camera.pos_y + move_y;
+	if (move_x > 0)
+		check_x = new_x + WALL_DIST;
+	else
+		check_x = new_x - WALL_DIST;
+	if (game->map.content[(int)floor(game->camera.pos_y)][(int)floor(check_x)]
+		!= WALL)
+		game->camera.pos_x = new_x;
+	if (move_y > 0)
+		check_y = new_y + WALL_DIST;
+	else
+		check_y = new_y - WALL_DIST;
+	if (game->map.content[(int)floor(check_y)][(int)floor(game->camera.pos_x)]
+		!= WALL)
+		game->camera.pos_y = new_y;
+}
+
 void	key_move(t_game *game)
 {
-	float	oldDirX;
-	float	oldPlaneX;
+	float	move_x;
+	float	move_y;
 
-	if (game->key_table['q'])
+	move_x = 0.0f;
+	move_y = 0.0f;
+	if (game->key_table[KEY_W])
 	{
-		oldDirX = game->camera.dir_x;
-		game->camera.dir_x = game->camera.dir_x * cos(-game->rules.rot_speed) - game->camera.dir_y * sin(-1 * game->rules.rot_speed);
-		game->camera.dir_y = oldDirX * sin(-game->rules.rot_speed) + game->camera.dir_y * cos(-game->rules.rot_speed);
-		oldPlaneX = game->camera.plan_x;
-		game->camera.plan_x = game->camera.plan_x * cos(-game->rules.rot_speed) - game->camera.plan_y * sin(-1 * game->rules.rot_speed);
-		game->camera.plan_y = oldPlaneX * sin(-game->rules.rot_speed) + game->camera.plan_y * cos(-game->rules.rot_speed);
+		move_x += game->camera.dir_x * game->rules.mov_speed;
+		move_y += game->camera.dir_y * game->rules.mov_speed;
 	}
-	if (game->key_table['e'])
+	if (game->key_table[KEY_S])
 	{
-		oldDirX = game->camera.dir_x;
-		game->camera.dir_x = game->camera.dir_x * cos(game->rules.rot_speed) - game->camera.dir_y * sin(game->rules.rot_speed);
-		game->camera.dir_y = oldDirX * sin(game->rules.rot_speed) + game->camera.dir_y * cos(game->rules.rot_speed);
-		oldPlaneX = game->camera.plan_x;
-		game->camera.plan_x = game->camera.plan_x * cos(game->rules.rot_speed) - game->camera.plan_y * sin(game->rules.rot_speed);
-		game->camera.plan_y = oldPlaneX * sin(game->rules.rot_speed) + game->camera.plan_y * cos(game->rules.rot_speed);
+		move_x -= game->camera.dir_x * game->rules.mov_speed;
+		move_y -= game->camera.dir_y * game->rules.mov_speed;
 	}
-
-	if (game->key_table['w'])
+	if (game->key_table[KEY_A])
 	{
-		if (game->map.content[(int)floor(game->camera.pos_x + game->rules.mov_speed * game->camera.dir_x)][(int)floor(game->camera.pos_y)] == 0)
-			game->camera.pos_x += game->rules.mov_speed * game->camera.dir_x;
-		if (game->map.content[(int)floor(game->camera.pos_x)][(int)floor(game->camera.pos_y + game->rules.mov_speed * game->camera.dir_y)] == 0)
-			game->camera.pos_y += game->rules.mov_speed * game->camera.dir_y;
+		move_x -= game->camera.plan_x * game->rules.mov_speed;
+		move_y -= game->camera.plan_y * game->rules.mov_speed;
 	}
-	if (game->key_table['s'])
+	if (game->key_table[KEY_D])
 	{
-		if (game->map.content[(int)floor(game->camera.pos_x - game->rules.mov_speed * game->camera.dir_x)][(int)floor(game->camera.pos_y)] == 0)
-			game->camera.pos_x -= game->rules.mov_speed * game->camera.dir_x;
-		if (game->map.content[(int)floor(game->camera.pos_x)][(int)floor(game->camera.pos_y - game->rules.mov_speed * game->camera.dir_y)] == 0)
-			game->camera.pos_y -= game->rules.mov_speed * game->camera.dir_y;
+		move_x += game->camera.plan_x * game->rules.mov_speed;
+		move_y += game->camera.plan_y * game->rules.mov_speed;
 	}
-	if (game->key_table['a'])
+	if (move_x != 0.0f || move_y != 0.0f)
+		move_player(game, move_x, move_y);
+	if (move_x != 0.0f || move_y != 0.0f || game->key_table[KEY_Q]
+		|| game->key_table[KEY_E])
 	{
-		if (game->map.content[(int)floor(game->camera.pos_x - game->rules.mov_speed * game->camera.plan_x)][(int)floor(game->camera.pos_y)] == 0)
-			game->camera.pos_x -= game->rules.mov_speed * game->camera.plan_x;
-		if (game->map.content[(int)floor(game->camera.pos_x)][(int)floor(game->camera.pos_y - game->rules.mov_speed * game->camera.plan_y)] == 0)
-			game->camera.pos_y -= game->rules.mov_speed * game->camera.plan_y;
-	}
-	if (game->key_table['d'])
-	{
-		if (game->map.content[(int)floor(game->camera.pos_x + game->rules.mov_speed * game->camera.plan_x)][(int)floor(game->camera.pos_y)] == 0)
-			game->camera.pos_x += game->rules.mov_speed * game->camera.plan_x;
-		if (game->map.content[(int)floor(game->camera.pos_x)][(int)floor(game->camera.pos_y + game->rules.mov_speed * game->camera.plan_y)] == 0)
-			game->camera.pos_y += game->rules.mov_speed * game->camera.plan_y;
+		mlx_clear_window(game->screen.mlx, game->screen.win, (mlx_color)0u);
+		launch_ray(game);
+		mlx_put_image_to_window(game->screen.mlx, game->screen.win,
+			game->screen.img, 0, 0);
 	}
 }

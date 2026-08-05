@@ -197,7 +197,7 @@ def main():
 		game["dt"] = game["clock"].tick(60) / 1000.0
 
 		# print(int(1.0 / game["dt"]))
-		# print(f"{game["dirX"]} {game["dirY"]}")
+		print("{}".format(game))
 
 if __name__ == "__main__":
 	main()
