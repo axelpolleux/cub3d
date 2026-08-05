@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/05 13:46:53 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/05 15:57:57 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main_parser(int ac, char **av, t_game *game)
 {
 	int	fd;
 
+	(void)game;
 	if (!check_args(ac) || !check_files(av))
 		return (0);
 	fd = open(av[1], O_RDONLY);

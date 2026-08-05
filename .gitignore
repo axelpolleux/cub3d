@@ -56,4 +56,4 @@ dkms.conf
 .vscode/
 cub3d
 .idea/
-tmp_maps/
+tmp/
