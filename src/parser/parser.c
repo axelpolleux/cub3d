@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/05 11:15:36 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/05 12:15:36 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,29 @@ int	error(char *str)
 	return (0);
 }
 
-int	main_parser(int ac, char **av, t_game *game)
+static	int	check_args(int ac)
 {
-	int	fd;
-
-	(void)game;
 	if (ac > 2)
 		return (error("ヽ༼ຈʖ̯ຈ༽ﾉ\nWOW calm down !!\nI just need one argument"));
 	else if (ac < 2)
 		return (error("You don't wanna talk ?\n⊙ω⊙\nGive me one argument"));
+	return (1);
+}
+
+static	int check_files(char **av)
+{
 	if (ft_strlen(av[1]) <= 4 || ft_strncmp(av[1] + (ft_strlen(av[1])
-				- 4), ".cub", 4) != 0)
+			- 4), ".cub", 4) != 0)
 		return (error("x⸑x how can you miss it ?\nOnly .cub files"));
+	return (1);
+}
+
+int	main_parser(int ac, char **av, t_game *game)
+{
+	int	fd;
+
+	if (!check_args(ac) || !check_files(av))
+		return (0);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
