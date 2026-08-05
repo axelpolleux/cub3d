@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/05 12:15:36 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/05 13:46:53 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static	int	check_args(int ac)
 	return (1);
 }
 
-static	int check_files(char **av)
+static	int	check_files(char **av)
 {
 	if (ft_strlen(av[1]) <= 4 || ft_strncmp(av[1] + (ft_strlen(av[1])
-			- 4), ".cub", 4) != 0)
+				- 4), ".cub", 4) != 0)
 		return (error("x⸑x how can you miss it ?\nOnly .cub files"));
 	return (1);
 }
