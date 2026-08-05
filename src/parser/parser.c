@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/05 18:23:02 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/05 18:49:26 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main_parser(int ac, char **av, t_game *game)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
 	printf("Nord: %s\n", fetch_path(fd, "NO"));
 	printf("Sud: %s\n", fetch_path(fd, "SO"));
-	printf("Est: %s\n", fetch_path(fd, "WE"));
-	printf("Ouest: %s\n", fetch_path(fd, "EA"));
+	printf("Est: %s\n", fetch_path(fd, "EA"));
+	printf("Ouest: %s\n", fetch_path(fd, "WE"));
 	return (1);
 }
