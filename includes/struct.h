@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/03 20:31:39 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/06 18:57:27 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,21 @@ typedef	struct	s_rules
 	float	rot_speed;
 }	t_rules;
 
+typedef	struct s_image
+{
+	mlx_image	content;
+	int			width;
+	int			height;
+}	t_image;
+
 typedef struct s_texture
 {
 	mlx_color	ground_color;
 	mlx_color	sky_color;
-	mlx_image	north_face;
-	mlx_image	south_face;
-	mlx_image	west_face;
-	mlx_image	east_face;
+	t_image		north_face;
+	t_image		south_face;
+	t_image		west_face;
+	t_image		east_face;
 }	t_texture;
 
 typedef struct	s_camera
