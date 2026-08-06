@@ -6,13 +6,13 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 19:28:37 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 20:37:14 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/06 13:28:23 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-void give_ray_color( t_game *game, t_ray *ray )
+void	draw_wall_line( t_game *game, t_ray *ray )
 {
 	float	  wall_x;
 	t_image	  image;
@@ -28,9 +28,9 @@ void give_ray_color( t_game *game, t_ray *ray )
 	else if ( ray->side == 0 && ray->step_x > 0 )
 		image = game->textures.north_face;
 	else if ( ray->side == 1 && ray->step_y < 0 )
-		image = game->textures.east_face;
-	else if ( ray->side == 1 && ray->step_y > 0 )
 		image = game->textures.west_face;
+	else if ( ray->side == 1 && ray->step_y > 0 )
+		image = game->textures.east_face;
 	if ( ray->side == 0 )
 		wall_x = game->camera.pos_y + ray->perp_wall_dist * ray->dir_y;
 	else
@@ -39,9 +39,9 @@ void give_ray_color( t_game *game, t_ray *ray )
 	tex_x = (int)( wall_x * (float)image.width );
 	if ( tex_x >= image.width )
 		tex_x = image.width - 1;
-	if ( ray->side == 0 && ray->dir_x > 0 )
+	if ( ray->side == 0 && ray->dir_x < 0 )
 		tex_x = image.width - tex_x - 1;
-	if ( ray->side == 1 && ray->dir_y < 0 )
+	if ( ray->side == 1 && ray->dir_y > 0 )
 		tex_x = image.width - tex_x - 1;
 	step = 1.0 * image.height / ray->line_height;
 	tex_pos =
@@ -58,11 +58,7 @@ void give_ray_color( t_game *game, t_ray *ray )
 									 image.content,
 									 tex_x,
 									 tex_y );
-		mlx_set_image_pixel( game->screen.mlx,
-							 game->screen.img,
-							 ray->pos_x,
-							 y,
-							 color );
+		set_arrays(game->screen.frame_buffer, ray->pos_x, y, game->screen.width, color);
 		y++;
 	}
 }
@@ -84,26 +80,18 @@ void draw_ray_wall( t_ray *ray, t_game *game )
 	if ( ray->hit == 1 )
 	{
 		i = 0;
-		give_ray_color( game, ray );
+		draw_wall_line( game, ray );
 		while ( i < game->screen.height )
 		{
 			if ( i < ray->draw_start )
 			{
 				color = game->textures.sky_color;
-				mlx_set_image_pixel( game->screen.mlx,
-									 game->screen.img,
-									 ray->pos_x,
-									 i,
-									 color );
+				set_arrays(game->screen.frame_buffer, ray->pos_x, i, game->screen.width, color);
 			}
 			else if ( i > ray->draw_end )
 			{
 				color = game->textures.ground_color;
-				mlx_set_image_pixel( game->screen.mlx,
-									 game->screen.img,
-									 ray->pos_x,
-									 i,
-									 color );
+				set_arrays(game->screen.frame_buffer, ray->pos_x, i, game->screen.width, color);
 			}
 			i++;
 		}

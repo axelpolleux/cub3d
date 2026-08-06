@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 18:18:30 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 18:19:40 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/06 13:22:23 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,5 @@ void	key_move(t_game *game)
 		move_player(game, move_x, move_y);
 	if (move_x != 0.0f || move_y != 0.0f || game->key_table[KEY_Q]
 		|| game->key_table[KEY_E])
-	{
-		mlx_clear_window(game->screen.mlx, game->screen.win, (mlx_color)0u);
 		launch_ray(game);
-		mlx_put_image_to_window(game->screen.mlx, game->screen.win,
-			game->screen.img, 0, 0);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 20:34:08 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/06 12:26:03 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ void	initialise_rules(t_rules *rules)
 
 void	initialise_screen(t_screen *screen)
 {
-	screen->width = 720;
-	screen->height = 480;
+	screen->width = 1920;
+	screen->height = 1080;
 	screen->img = mlx_new_image(screen->mlx, screen->width, screen->height);
 	screen->win_info = (mlx_window_create_info){0};
 	screen->win_info.title = "cub3D";
 	screen->win_info.width = screen->width;
 	screen->win_info.height = screen->height;
 	screen->win = mlx_new_window(screen->mlx, &screen->win_info);
+	screen->frame_buffer = malloc(screen->width * screen->height * sizeof(mlx_color));
 }
 
 void	initialise_game(t_game *game)

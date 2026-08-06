@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/05 19:57:41 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/06 12:36:38 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_screen
 	mlx_image				img;
 	int						height;
 	int						width;
-
+	mlx_color				*frame_buffer;
 }	t_screen;
 
 typedef struct	s_camera

@@ -5,6 +5,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "math.h"
+# include "array.h"
+# include "mlx_extended.h"
+# include "libft.h"
 
 void	launch_ray(t_game *game);
 void	launch_one_ray(int ray_x, t_game *game);

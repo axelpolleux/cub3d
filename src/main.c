@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:06:41 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 20:27:06 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/06 13:36:31 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	bruteforce_map(t_game *game)
 				game->map.content[y][x] = VOID;
 		}
 	}
+	game->map.content[10][10] = WALL;
 }
 
 void	bruteforce_textures(char **argv, t_game *game)
@@ -73,10 +74,7 @@ int	main(int argc, char **argv)
 	bruteforce_map(&game);
 	bruteforce_textures(argv, &game);
 	initialise_game(&game);
-	mlx_clear_window(game.screen.mlx, game.screen.win, (mlx_color)0u);
 	launch_ray(&game);
-	mlx_put_image_to_window(game.screen.mlx, game.screen.win, game.screen.img,
-		0, 0);
 	mlx_add_loop_hook(game.screen.mlx, update, &game);
 	mlx_on_event(game.screen.mlx, game.screen.win, MLX_KEYDOWN, keydown_hook,
 		&game);
@@ -85,5 +83,12 @@ int	main(int argc, char **argv)
 	mlx_on_event(game.screen.mlx, game.screen.win, MLX_WINDOW_EVENT,
 		window_hook, &game);
 	mlx_loop(game.screen.mlx);
+	free(game.screen.frame_buffer);
+	mlx_destroy_image(game.screen.mlx, game.screen.img);
+	mlx_destroy_image(game.screen.mlx, game.textures.north_face.content);
+	mlx_destroy_image(game.screen.mlx, game.textures.south_face.content);
+	mlx_destroy_image(game.screen.mlx, game.textures.east_face.content);
+	mlx_destroy_image(game.screen.mlx, game.textures.west_face.content);
+	mlx_destroy_window(game.screen.mlx, game.screen.win);
 	return (0);
 }
