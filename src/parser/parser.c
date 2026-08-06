@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/06 17:01:06 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/06 18:55:06 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,18 @@ static	int	check_args(int ac)
 	return (1);
 }
 
-static	int	check_files(char **av)
-{
-	if (ft_strlen(av[1]) <= 4 || ft_strncmp(av[1] + (ft_strlen(av[1])
-				- 4), ".cub", 4) != 0)
-		return (error("x⸑x how can you miss it ?\nOnly .cub files"));
-	return (1);
-}
-
 int	main_parser(int ac, char **av, t_game *game)
 {
 	int	fd;
 
 	(void)game;
-	if (!check_args(ac) || !check_files(av))
+	if (!check_args(ac) || !check_files(av) || !check_folder(av))
 		return (0);
-	fd = open(av[1], O_DIRECTORY);
-	if (fd > 0)
-	{
-		close(fd);
-		return (error("(ᕗ ͠° ਊ ͠° )ᕗ a folder ?\n"
-				" seriously ?"));
-	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
-	printf("Sud: %s\n", fetch_path(fd, "SO"));
+	if (!set_textures(game, av))
+		return (error("Texture !"));
+	close(fd);
 	return (1);
 }

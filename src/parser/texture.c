@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/06 17:57:55 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/06 18:57:54 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,11 @@ char	*fetch_path(int fd, char *str)
 		}
 	}
 	return (res);
+}
+
+int	set_textures(t_game *game, char **av)
+{
+	(void)game;
+	(void)av;
+	return (1);
 }
