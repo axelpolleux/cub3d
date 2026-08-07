@@ -18,14 +18,14 @@
 # include "struct.h"
 # include <math.h>
 
-# define KEY_Q		20
-# define KEY_W		26
-# define KEY_E		8
-# define KEY_A		4
-# define KEY_S		22
-# define KEY_D		7
-# define KEY_ESCAPE	41
-# define WALL_DIST	0.2f
+# define KEY_Q 20
+# define KEY_W 26
+# define KEY_E 8
+# define KEY_A 4
+# define KEY_S 22
+# define KEY_D 7
+# define KEY_ESCAPE 41
+# define WALL_DIST 0.2f
 
 void	key_move(t_game *game);
 void	key_escape(t_game *game);

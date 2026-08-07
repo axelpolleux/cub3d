@@ -6,13 +6,13 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 17:32:06 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 18:20:26 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/07 16:24:09 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 
-void	key_rot(t_game *game)
+static void	key_rot_q(t_game *game)
 {
 	float	old_dir_x;
 	float	old_plan_x;
@@ -30,6 +30,13 @@ void	key_rot(t_game *game)
 		game->camera.plan_y = old_plan_x * sin(-game->rules.rot_speed)
 			+ game->camera.plan_y * cos(-game->rules.rot_speed);
 	}
+}
+
+static void	key_rot_e(t_game *game)
+{
+	float	old_dir_x;
+	float	old_plan_x;
+
 	if (game->key_table[KEY_E])
 	{
 		old_dir_x = game->camera.dir_x;
@@ -43,4 +50,10 @@ void	key_rot(t_game *game)
 		game->camera.plan_y = old_plan_x * sin(game->rules.rot_speed)
 			+ game->camera.plan_y * cos(game->rules.rot_speed);
 	}
+}
+
+void	key_rot(t_game *game)
+{
+	key_rot_e(game);
+	key_rot_q(game);
 }

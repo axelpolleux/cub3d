@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 18:18:30 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/06 13:22:23 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/07 15:58:12 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ static void	move_player(t_game *game, float move_x, float move_y)
 		game->camera.pos_y = new_y;
 }
 
+static void	add_key_to_move(t_game *game, float *move_x, float *move_y)
+{
+	if (game->key_table[KEY_W])
+	{
+		*move_x += game->camera.dir_x * game->rules.mov_speed;
+		*move_y += game->camera.dir_y * game->rules.mov_speed;
+	}
+	if (game->key_table[KEY_S])
+	{
+		*move_x -= game->camera.dir_x * game->rules.mov_speed;
+		*move_y -= game->camera.dir_y * game->rules.mov_speed;
+	}
+	if (game->key_table[KEY_A])
+	{
+		*move_x -= game->camera.plan_x * game->rules.mov_speed;
+		*move_y -= game->camera.plan_y * game->rules.mov_speed;
+	}
+	if (game->key_table[KEY_D])
+	{
+		*move_x += game->camera.plan_x * game->rules.mov_speed;
+		*move_y += game->camera.plan_y * game->rules.mov_speed;
+	}
+}
+
 void	key_move(t_game *game)
 {
 	float	move_x;
@@ -44,26 +68,7 @@ void	key_move(t_game *game)
 
 	move_x = 0.0f;
 	move_y = 0.0f;
-	if (game->key_table[KEY_W])
-	{
-		move_x += game->camera.dir_x * game->rules.mov_speed;
-		move_y += game->camera.dir_y * game->rules.mov_speed;
-	}
-	if (game->key_table[KEY_S])
-	{
-		move_x -= game->camera.dir_x * game->rules.mov_speed;
-		move_y -= game->camera.dir_y * game->rules.mov_speed;
-	}
-	if (game->key_table[KEY_A])
-	{
-		move_x -= game->camera.plan_x * game->rules.mov_speed;
-		move_y -= game->camera.plan_y * game->rules.mov_speed;
-	}
-	if (game->key_table[KEY_D])
-	{
-		move_x += game->camera.plan_x * game->rules.mov_speed;
-		move_y += game->camera.plan_y * game->rules.mov_speed;
-	}
+	add_key_to_move(game, &move_x, &move_y);
 	if (move_x != 0.0f || move_y != 0.0f)
 		move_player(game, move_x, move_y);
 	if (move_x != 0.0f || move_y != 0.0f || game->key_table[KEY_Q]
