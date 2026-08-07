@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:27:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/06 18:48:15 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/07 19:09:22 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,29 @@ int	check_folder(char **av)
 	{
 		close(fd);
 		return (error("(ᕗ ͠° ਊ ͠° )ᕗ a folder ?\n"
-				" seriously ?"));
+				"seriously ?"));
 	}
 	return (1);
+}
+
+char	**fetch_content(int fd)
+{
+	char	*base;
+	char	*line;
+	char	**res;
+
+	res = 0;
+	base = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		base = ft_strjoin(base, line);
+		base = ft_strjoin(base, "\n");
+		free(line);
+	}
+	res = ft_split(base, '\n');
+	free(base);
+	return (res);
 }

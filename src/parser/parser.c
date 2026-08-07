@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/06 18:55:06 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/07 18:56:51 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,23 @@ static	int	check_args(int ac)
 	return (1);
 }
 
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 int	main_parser(int ac, char **av, t_game *game)
 {
-	int	fd;
+	int		fd;
+	char	**file_content;
 
 	(void)game;
 	if (!check_args(ac) || !check_files(av) || !check_folder(av))
@@ -41,8 +55,10 @@ int	main_parser(int ac, char **av, t_game *game)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
-	if (!set_textures(game, av))
-		return (error("Texture !"));
+	file_content = fetch_content(fd);
 	close(fd);
+	free_tab(file_content);
+	if (!init_game(&game, file_content))
+		return (0);
 	return (1);
 }

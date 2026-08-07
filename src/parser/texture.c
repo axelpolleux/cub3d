@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/06 18:57:54 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/07 18:51:14 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include "parser.h"
 #include "struct.h"
 
-char	*fetch_path(int fd, char *str)
+char	*fetch_path(char *str, char **content)
 {
+	int		i;
 	char	*line;
 	char	*res;
 	char	**s_line;
 
+	i = 0;
 	res = 0;
-	while (1)
+	while (content[i])
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
+		line = content[i];
 		s_line = ft_split(line, ' ');
 		if (!s_line)
 			return ((char *)(size_t)error("Malloc has failed\n"
@@ -37,13 +37,17 @@ char	*fetch_path(int fd, char *str)
 			res = ft_calloc(ft_strlen(s_line[1]) + 1, sizeof(char));
 			ft_strlcpy(res, s_line[1], ft_strlen(s_line[1]) + 1);
 		}
+		i++;
 	}
 	return (res);
 }
 
-int	set_textures(t_game *game, char **av)
+t_image	*set_texture(char *str, char **content)
 {
-	(void)game;
-	(void)av;
-	return (1);
+	char	*path;
+	t_image	res;
+
+	path = fetch_path(str, content);
+	res->content = path;
+	return (res);
 }

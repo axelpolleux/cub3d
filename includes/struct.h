@@ -6,15 +6,15 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/06 18:57:27 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/07 14:17:54 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include <stdbool.h>
 # include <SDL2/SDL_scancode.h>
+# include <stdbool.h>
 # include "mlx.h"
 
 typedef enum e_cell
