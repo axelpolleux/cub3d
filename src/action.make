@@ -4,7 +4,7 @@ ifdef SANIT
 	DEBUG=1
 endif
 ifdef DEBUG
-	CFLAGS += -g -Wall -Wextra -DDEBUG=yes
+	CFLAGS += -g -Wall -Wextra -DDEBUG=yes -O3
 else
 	CFLAGS := -Wall -Wextra -Werror
 endif

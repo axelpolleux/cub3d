@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:06:41 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/07 15:53:06 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/08 17:53:43 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	bruteforce_map(t_game *game)
 
 	y = 0;
 	game->map = (t_map){.width = 200, .height = 200};
-	game->map.content = malloc(200 * sizeof(int *));
-	while (y < 200)
+	game->map.content = malloc(game->map.height * sizeof(int *));
+	while (y < game->map.height)
 	{
 		x = 0;
-		game->map.content[y] = malloc(200 * sizeof(int));
-		while (x < 200)
+		game->map.content[y] = malloc(game->map.width * sizeof(int));
+		while (x < game->map.width)
 		{
 			if (x == 0 || y == 0 || x == game->map.width - 1
 				|| y == game->map.height - 1)
@@ -41,24 +41,29 @@ void	bruteforce_map(t_game *game)
 	}
 }
 
+void	free_map(t_game *game)
+{
+	int	y;
+
+	y = 0;
+	while (y < game->map.height)
+	{
+		free(game->map.content[y]);
+		y++;
+	}
+	free(game->map.content);
+}
+
 void	bruteforce_textures(char **argv, t_game *game)
 {
 	game->textures.north_face.content
-		= mlx_new_image_from_file(game->screen.mlx, argv[1], NULL, NULL);
-	game->textures.north_face.width = 2000;
-	game->textures.north_face.height = 2000;
+		= mlx_new_image_from_file(game->screen.mlx, argv[1], &game->textures.north_face.width, &game->textures.north_face.height);
 	game->textures.south_face.content
-		= mlx_new_image_from_file(game->screen.mlx, argv[2], NULL, NULL);
-	game->textures.south_face.width = 2000;
-	game->textures.south_face.height = 2000;
-	game->textures.east_face.content
-		= mlx_new_image_from_file(game->screen.mlx, argv[3], NULL, NULL);
-	game->textures.east_face.width = 2000;
-	game->textures.east_face.height = 2000;
+		= mlx_new_image_from_file(game->screen.mlx, argv[2], &game->textures.south_face.width, &game->textures.south_face.height);
 	game->textures.west_face.content
-		= mlx_new_image_from_file(game->screen.mlx, argv[4], NULL, NULL);
-	game->textures.west_face.width = 2000;
-	game->textures.west_face.height = 2000;
+		= mlx_new_image_from_file(game->screen.mlx, argv[3], &game->textures.west_face.width, &game->textures.west_face.height);
+	game->textures.east_face.content
+		= mlx_new_image_from_file(game->screen.mlx, argv[4], &game->textures.east_face.width, &game->textures.east_face.height);
 	game->textures.sky_color = (mlx_color){.r = 0, .g = 125, .b = 60, .a = 255};
 	game->textures.ground_color.rgba = 0xFFFFFFFF;
 }
@@ -89,6 +94,7 @@ void	main_loop(t_game *game)
 	mlx_destroy_image(game->screen.mlx, game->textures.east_face.content);
 	mlx_destroy_image(game->screen.mlx, game->textures.west_face.content);
 	mlx_destroy_window(game->screen.mlx, game->screen.win);
+	mlx_destroy_context(game->screen.mlx);
 }
 
 int	main(int argc, char **argv)
@@ -104,5 +110,6 @@ int	main(int argc, char **argv)
 	initialise_game(&game);
 	launch_ray(&game);
 	main_loop(&game);
+	free_map(&game);
 	return (0);
 }
