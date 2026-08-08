@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 19:41:40 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 20:28:10 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,20 @@ char	*fetch_path(char *str, char **content)
 		line = content[i];
 		s_line = ft_split(line, ' ');
 		if (!s_line)
-			return ((char *)(size_t)error("Malloc has failed\n"
-				"Everything is fine\n☉ ‿ ⚆"));
-		if (!s_line[0] && !s_line[1])
+			return (NULL);
+		if (!s_line[0])
+		{
+			free_tab(s_line);
+			i++;
 			continue ;
-		if (ft_strncmp(str, s_line[0], ft_strlen(s_line[0])) == 0)
+		}
+		if (s_line[1] && ft_strncmp(str, s_line[0], ft_strlen(s_line[0])) == 0)
 		{
 			res = ft_calloc(ft_strlen(s_line[1]) + 1, sizeof(char));
 			ft_strlcpy(res, s_line[1], ft_strlen(s_line[1]) + 1);
+			free_tab(s_line);
 		}
+		free_tab(s_line);
 		i++;
 	}
 	return (res);
@@ -64,7 +69,8 @@ int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 
 	path = fetch_path(search, file_content);
 	if (!path)
-		return (0);
+		return (error("Wrong path for texture\nʕノ•ᴥ•ʔノ ︵ ┻━┻\n"
+				"You were the chosen one"));
 	context = game->screen.mlx;
 	img->content = load(path, context);
 	if (!img->content)
