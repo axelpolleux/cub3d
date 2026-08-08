@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/07 18:58:56 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 13:31:52 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 int		main_parser(int ac, char **av, t_game *game);
 int		error(char *str);
 char	*fetch_path(char *str, char **content);
-int		check_files(char **av);
+int		check_file(char **av);
 int		check_folder(char **av);
-int		set_textures(t_game *game, char **av);
+void	set_textures(t_game *game, char **file_content);
 char	**fetch_content(int fd);
-int		init_game(t_game game);
+int		*fetch_colors(char *str, char **content);
+int		 init_game(t_game *game, char **file_content);
 
 #endif
