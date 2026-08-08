@@ -6,13 +6,14 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 13:31:33 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:00:33 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 #include "struct.h"
+#include "mlx.h"
 
 char	*fetch_path(char *str, char **content)
 {
@@ -42,10 +43,50 @@ char	*fetch_path(char *str, char **content)
 	return (res);
 }
 
-void	set_textures(t_game *game, char **file_content)
+mlx_image	load(char *path, mlx_context mlx)
+{
+	int			fd;
+	mlx_image	img;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	close(fd);
+	img = mlx_new_image_from_file(mlx, path,
+			NULL, NULL);
+	return (img);
+}
+
+
+
+int	set_image(t_game *game, t_image *img, char *search, char **file_content)
+{
+	char		*path;
+	mlx_context	context;
+
+	path = fetch_path(search, file_content);
+	if (!path)
+		return (0);
+	context = game->screen.mlx;
+	img->content = load(path, context);
+	if (!img->content)
+		return (0);
+	free(path);
+	return (1);
+}
+
+int	set_textures(t_game *game, char **file_content)
 {
 	t_texture	*base;
 
-	base->north_face.content = fetch_path("NO", file_content);
-
+	base = &game->textures;
+	if (!set_image(game, &base->north_face, "NO", file_content))
+		return (error("North texture missing !"));
+	if (!set_image(game, &base->south_face, "SO", file_content))
+		return (error("South texture missing !"));
+	if (!set_image(game, &base->east_face, "EA", file_content))
+		return (error("East texture missing !"));
+	if (!set_image(game, &base->west_face, "WE", file_content))
+		return (error("West texture missing !"));
+	return (1);
 }

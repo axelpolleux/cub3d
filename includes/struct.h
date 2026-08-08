@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/07 14:17:54 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 17:19:15 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,28 @@ typedef struct	s_camera
 	float	plan_y;
 }	t_camera;
 
+typedef struct s_screen
+{
+	mlx_context					mlx;
+	mlx_window_create_info		win_info;
+	mlx_window					win;
+	mlx_image					img;
+	int							height;
+	int							width;
+	mlx_color					*frame_buffer;
+}	t_screen;
+
 typedef struct	s_game
 {
 	bool			key_table[SDL_NUM_SCANCODES];
 	bool			running;
 	float			new_time;
 	float			old_time;
-	unsigned int	screen_w;
-	unsigned int	screen_h;
 	t_map			map;
 	t_rules			rules;
 	t_texture		textures;
 	t_camera		camera;
+	t_screen		screen;
 }	t_game;
 
 #endif
