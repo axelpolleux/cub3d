@@ -6,14 +6,14 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:27:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/07 19:09:22 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 12:33:56 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
 
-int	check_files(char **av)
+int	check_file(char **av)
 {
 	if (ft_strlen(av[1]) <= 4 || ft_strncmp(av[1] + (ft_strlen(av[1])
 				- 4), ".cub", 4) != 0)
