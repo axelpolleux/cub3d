@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 19:00:33 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 19:41:40 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ mlx_image	load(char *path, mlx_context mlx)
 			NULL, NULL);
 	return (img);
 }
-
-
 
 int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 {
