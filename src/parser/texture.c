@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/07 18:51:14 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 13:31:33 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ char	*fetch_path(char *str, char **content)
 	return (res);
 }
 
-t_image	*set_texture(char *str, char **content)
+void	set_textures(t_game *game, char **file_content)
 {
-	char	*path;
-	t_image	res;
+	t_texture	*base;
 
-	path = fetch_path(str, content);
-	res->content = path;
-	return (res);
+	base->north_face.content = fetch_path("NO", file_content);
+
 }

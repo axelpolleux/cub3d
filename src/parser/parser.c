@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/07 18:56:51 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/08 12:35:43 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,15 @@ int	main_parser(int ac, char **av, t_game *game)
 	int		fd;
 	char	**file_content;
 
-	(void)game;
-	if (!check_args(ac) || !check_files(av) || !check_folder(av))
+	if (!check_args(ac) || !check_file(av) || !check_folder(av))
 		return (0);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
 	file_content = fetch_content(fd);
 	close(fd);
-	free_tab(file_content);
-	if (!init_game(&game, file_content))
+	if (!init_game(game, file_content))
 		return (0);
+	free_tab(file_content);
 	return (1);
 }
