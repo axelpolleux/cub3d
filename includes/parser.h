@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 18:43:21 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 19:11:16 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		check_folder(char **av);
 // checking and setting graphical parts
 int		set_textures(t_game *game, char **file_content);
 int		set_map(t_game *game, char **file_content);
+int		set_colors(t_game *game, char **file_content);
 
 // getting information from defined source
 char	*fetch_path(char *str, char **content);
