@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 20:12:30 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 14:42:55 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int		set_textures(t_game *game, char **file_content);
 char	**fetch_content(int fd);
 int		*fetch_colors(char *str, char **content);
 int		init_game(t_game *game, char **file_content);
-void	free_tab(char **tab);
+void	free_tab(char ***tab);
 
 #endif

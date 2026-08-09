@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:27:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 12:33:56 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 15:35:11 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ char	**fetch_content(int fd)
 	char	**res;
 
 	res = 0;
-	base = NULL;
+	base = ft_strdup("");
+	if (!base)
+		return (0);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -50,6 +52,11 @@ char	**fetch_content(int fd)
 			break ;
 		base = ft_strjoin(base, line);
 		base = ft_strjoin(base, "\n");
+		if (!base)
+		{
+			free(line);
+			return (0);
+		}
 		free(line);
 	}
 	res = ft_split(base, '\n');

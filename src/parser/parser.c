@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 12:35:43 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 15:59:47 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,26 @@ static	int	check_args(int ac)
 	return (1);
 }
 
-void	free_tab(char **tab)
+void	free_tab(char ***tab)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while ((*tab)[i])
 	{
-		free(tab[i]);
+		free((*tab)[i]);
 		i++;
 	}
-	free(tab);
+	free(*tab);
 }
 
 int	main_parser(int ac, char **av, t_game *game)
 {
 	int		fd;
 	char	**file_content;
+	int		exit_code;
 
+	exit_code = 1;
 	if (!check_args(ac) || !check_file(av) || !check_folder(av))
 		return (0);
 	fd = open(av[1], O_RDONLY);
@@ -56,8 +58,13 @@ int	main_parser(int ac, char **av, t_game *game)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
 	file_content = fetch_content(fd);
 	close(fd);
+	if (!file_content || !file_content[0])
+	{
+		free_tab(&file_content);
+		return (error("Where is the content ?\n(ㆆ _ ㆆ)"));
+	}
 	if (!init_game(game, file_content))
-		return (0);
-	free_tab(file_content);
-	return (1);
+		exit_code = 0;
+	free_tab(&file_content);
+	return (exit_code);
 }

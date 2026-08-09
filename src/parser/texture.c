@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_manager.c                                 :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/05 14:32:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/08 20:28:10 by apolleux         ###   ########.fr       */
+/*   Created: 2026/08/09 14:03:07 by apolleux          #+#    #+#             */
+/*   Updated: 2026/08/09 16:28:59 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,43 @@ char	*fetch_path(char *str, char **content)
 			return (NULL);
 		if (!s_line[0])
 		{
-			free_tab(s_line);
+			free_tab(&s_line);
 			i++;
 			continue ;
 		}
-		if (s_line[1] && ft_strncmp(str, s_line[0], ft_strlen(s_line[0])) == 0)
+		if (s_line[1] && (ft_strlen(str) == ft_strlen(s_line[0]))
+			&& ft_strncmp(str, s_line[0], ft_strlen(str)) == 0)
 		{
 			res = ft_calloc(ft_strlen(s_line[1]) + 1, sizeof(char));
+			if (!res)
+			{
+				free_tab(&s_line);
+				break ;
+			}
 			ft_strlcpy(res, s_line[1], ft_strlen(s_line[1]) + 1);
-			free_tab(s_line);
+			free_tab(&s_line);
+			break ;
 		}
-		free_tab(s_line);
+		free_tab(&s_line);
 		i++;
 	}
 	return (res);
 }
 
-mlx_image	load(char *path, mlx_context mlx)
+t_image	load(char *path, mlx_context mlx)
 {
 	int			fd;
-	mlx_image	img;
+	t_image		img;
 
 	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	close(fd);
-	img = mlx_new_image_from_file(mlx, path,
-			NULL, NULL);
+	if (fd > 0)
+	{
+		img.content = mlx_new_image_from_file(mlx, path,
+				&img.width, &img.height);
+		close(fd);
+	}
+	else
+		img.content = 0;
 	return (img);
 }
 
@@ -72,9 +82,12 @@ int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 		return (error("Wrong path for texture\nʕノ•ᴥ•ʔノ ︵ ┻━┻\n"
 				"You were the chosen one"));
 	context = game->screen.mlx;
-	img->content = load(path, context);
+	*img = load(path, context);
 	if (!img->content)
+	{
+		free(path);
 		return (0);
+	}
 	free(path);
 	return (1);
 }
