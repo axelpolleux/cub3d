@@ -6,68 +6,113 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/03 20:31:39 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 14:55:14 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include <stdbool.h>
-# include <SDL2/SDL_scancode.h>
 # include "mlx.h"
+# include <SDL2/SDL_scancode.h>
+# include <stdbool.h>
 
 typedef enum e_cell
 {
 	VOID,
 	WALL
-}	t_cell;
+}							t_cell;
 
-typedef struct	s_map
+typedef struct s_map
 {
-	int				**content;
-	unsigned int	width;
-	unsigned int	height;
-}	t_map;
+	int						**content;
+	int						width;
+	int						height;
+}							t_map;
 
-typedef	struct	s_rules
+typedef struct s_vec2
 {
-	float	mov_speed;
-	float	rot_speed;
-}	t_rules;
+	int						x;
+	int						y;
+}							t_vec2;
 
-typedef struct s_texture
+typedef struct s_rules
 {
-	mlx_color	ground_color;
-	mlx_color	sky_color;
-	mlx_image	north_face;
-	mlx_image	south_face;
-	mlx_image	west_face;
-	mlx_image	east_face;
-}	t_texture;
+	float					mov_speed;
+	float					rot_speed;
+}							t_rules;
 
-typedef struct	s_camera
+typedef struct s_ray
 {
-	float	pos_x;
-	float	pos_y;
-	float	dir_x;
-	float	dir_y;
-	float	plan_x;
-	float	plan_y;
-}	t_camera;
+	int						pos_x;
+	float					dir_x;
+	float					dir_y;
+	int						map_x;
+	int						map_y;
+	int						step_x;
+	int						step_y;
+	float					side_dist_x;
+	float					side_dist_y;
+	float					delta_dist_x;
+	float					delta_dist_y;
+	float					perp_wall_dist;
+	float					line_height;
+	int						draw_start;
+	int						draw_end;
+	int						hit;
+	int						side;
+}							t_ray;
 
-typedef struct	s_game
+typedef struct s_image
 {
-	bool			key_table[SDL_NUM_SCANCODES];
-	bool			running;
-	float			new_time;
-	float			old_time;
-	unsigned int	screen_w;
-	unsigned int	screen_h;
-	t_map			map;
-	t_rules			rules;
-	t_texture		textures;
-	t_camera		camera;
-}	t_game;
+	mlx_image				content;
+	int						width;
+	int						height;
+}							t_image;
+
+typedef struct s_textures
+{
+	mlx_color				ground_color;
+	mlx_color				sky_color;
+	t_image					north_face;
+	t_image					south_face;
+	t_image					west_face;
+	t_image					east_face;
+}							t_textures;
+
+typedef struct s_screen
+{
+	mlx_context				mlx;
+	mlx_window_create_info	win_info;
+	mlx_window				win;
+	mlx_image				img;
+	int						height;
+	int						width;
+	mlx_color				*frame_buffer;
+}							t_screen;
+
+typedef struct s_camera
+{
+	float					pos_x;
+	float					pos_y;
+	float					dir_x;
+	float					dir_y;
+	float					plan_x;
+	float					plan_y;
+}							t_camera;
+
+typedef struct s_game
+{
+	bool					key_table[SDL_NUM_SCANCODES];
+	bool					running;
+	struct timeval			new_time;
+	struct timeval			old_time;
+	float					delta_time;
+	t_map					map;
+	t_rules					rules;
+	t_textures				textures;
+	t_camera				camera;
+	t_screen				screen;
+}							t_game;
 
 #endif

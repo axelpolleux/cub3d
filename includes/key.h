@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialise.h                                       :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/06 16:40:34 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/09 14:56:18 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/05 17:32:11 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/05 17:32:11 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INITIALISE_H
-# define INITIALISE_H
+#ifndef KEY_H
+# define KEY_H
 
 # include "mlx.h"
+# include "renderer.h"
 # include "struct.h"
-# include <sys/time.h>
+# include <math.h>
 
-void	initialise_screen(t_screen *screen);
-void	initialise_rules(t_rules *rules);
-void	initialise_game(t_game *game);
+# define KEY_Q 20
+# define KEY_W 26
+# define KEY_E 8
+# define KEY_A 4
+# define KEY_S 22
+# define KEY_D 7
+# define KEY_ESCAPE 41
+# define WALL_DIST 0.2f
+
+void	key_move(t_game *game);
+void	key_escape(t_game *game);
+void	key_rot(t_game *game);
+void	keyup_hook(int keycode, void *game_ptr);
+void	keydown_hook(int keycode, void *game_ptr);
+void	window_hook(int event, void *game_ptr);
 
 #endif

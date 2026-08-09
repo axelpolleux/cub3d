@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialise.h                                       :+:      :+:    :+:   */
+/*   key_escape.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/06 16:40:34 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/09 14:56:18 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/05 17:31:56 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/05 17:33:41 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INITIALISE_H
-# define INITIALISE_H
+#include "key.h"
 
-# include "mlx.h"
-# include "struct.h"
-# include <sys/time.h>
-
-void	initialise_screen(t_screen *screen);
-void	initialise_rules(t_rules *rules);
-void	initialise_game(t_game *game);
-
-#endif
+void	key_escape(t_game *game)
+{
+	if (game->key_table[KEY_ESCAPE])
+		mlx_loop_end(game->screen.mlx);
+}

@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialise.h                                       :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/06 16:40:34 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/09 14:56:18 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/04 16:16:30 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INITIALISE_H
-# define INITIALISE_H
+#include "key.h"
 
-# include "mlx.h"
-# include "struct.h"
-# include <sys/time.h>
+void	keyup_hook(int keycode, void *game_ptr)
+{
+	t_game	*game;
 
-void	initialise_screen(t_screen *screen);
-void	initialise_rules(t_rules *rules);
-void	initialise_game(t_game *game);
+	game = (t_game *)game_ptr;
+	game->key_table[keycode] = 0;
+}
 
-#endif
+void	keydown_hook(int keycode, void *game_ptr)
+{
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	game->key_table[keycode] = 1;
+}
+
+void	window_hook(int event, void *game_ptr)
+{
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	if (!event)
+		mlx_loop_end(game->screen.mlx);
+}
