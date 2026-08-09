@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/07 14:02:57 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/09 14:55:14 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,9 @@ typedef struct s_game
 {
 	bool					key_table[SDL_NUM_SCANCODES];
 	bool					running;
-	int						new_time;
-	int						old_time;
+	struct timeval			new_time;
+	struct timeval			old_time;
+	float					delta_time;
 	t_map					map;
 	t_rules					rules;
 	t_textures				textures;

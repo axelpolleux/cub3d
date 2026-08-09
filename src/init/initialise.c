@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/07 15:53:02 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/09 15:25:48 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	initialise_rules(t_rules *rules)
 {
-	rules->mov_speed = 0.2f;
-	rules->rot_speed = 0.03f;
+	rules->mov_speed = 10.0f;
+	rules->rot_speed = 3.0f;
 	return ;
 }
 
 void	initialise_screen(t_screen *screen)
 {
-	screen->width = 1920;
-	screen->height = 1080;
+	screen->width = 720;
+	screen->height = 480;
 	screen->img = mlx_new_image(screen->mlx, screen->width, screen->height);
 	screen->win_info = (mlx_window_create_info){0};
-	screen->win_info.title = "cub3D";
+	screen->win_info.title = "cubi3D";
 	screen->win_info.width = screen->width;
 	screen->win_info.height = screen->height;
 	screen->win = mlx_new_window(screen->mlx, &screen->win_info);
@@ -33,6 +33,7 @@ void	initialise_screen(t_screen *screen)
 
 void	initialise_game(t_game *game)
 {
+	gettimeofday(&game->new_time, NULL);
 	initialise_screen(&game->screen);
 	initialise_rules(&game->rules);
 	game->running = true;

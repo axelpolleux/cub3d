@@ -18,6 +18,5 @@ INCLUDES	:= -Iincludes -I$(MLX_DIR)/includes -I$(LIBFT_DIR)
 include		src/renderer/renderer.make
 include		src/init/initialise.make
 include		src/key/key.make
-include		src/array/array.make
 
 include		src/action.make

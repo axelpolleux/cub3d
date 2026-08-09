@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 13:06:41 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/08 17:53:43 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/09 15:12:04 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	main(int argc, char **argv)
 		return (1);
 	ft_bzero(&game, sizeof(t_game));
 	game.screen.mlx = mlx_init();
+	if (!game.screen.mlx)
+    	return (1);
 	bruteforce_map(&game);
 	bruteforce_textures(argv, &game);
 	initialise_game(&game);
