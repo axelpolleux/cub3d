@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 14:03:07 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 16:28:59 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 19:39:17 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 
 	path = fetch_path(search, file_content);
 	if (!path)
-		return (error("Wrong path for texture\nʕノ•ᴥ•ʔノ ︵ ┻━┻\n"
-				"You were the chosen one"));
+	{
+		ft_putstr_fd("ʕノ•ᴥ•ʔノ ︵ ┻━┻\n"
+			"You were the chosen one\n", 2);
+		return (0);
+	}
 	context = game->screen.mlx;
 	*img = load(path, context);
 	if (!img->content)
