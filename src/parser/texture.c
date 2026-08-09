@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 14:03:07 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 19:39:17 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/09 19:47:36 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,7 @@ int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 
 	path = fetch_path(search, file_content);
 	if (!path)
-	{
-		ft_putstr_fd("ʕノ•ᴥ•ʔノ ︵ ┻━┻\n"
-			"You were the chosen one\n", 2);
 		return (0);
-	}
 	context = game->screen.mlx;
 	*img = load(path, context);
 	if (!img->content)
@@ -101,12 +97,12 @@ int	set_textures(t_game *game, char **file_content)
 
 	base = &game->textures;
 	if (!set_image(game, &base->north_face, "NO", file_content))
-		return (error("North texture missing !"));
+		return (error("North texture missing !\nʕノ•ᴥ•ʔノ ︵ ┻━┻"));
 	if (!set_image(game, &base->south_face, "SO", file_content))
-		return (error("South texture missing !"));
+		return (error("South texture missing !\n(︶︹︶)"));
 	if (!set_image(game, &base->east_face, "EA", file_content))
-		return (error("East texture missing !"));
+		return (error("East texture missing !\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻"));
 	if (!set_image(game, &base->west_face, "WE", file_content))
-		return (error("West texture missing !"));
+		return (error("West texture missing !\n༼つಠ益ಠ༽つ ─=≡ΣO))"));
 	return (1);
 }
