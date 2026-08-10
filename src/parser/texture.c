@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 14:03:07 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 20:08:21 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:36:58 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,13 @@ int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 	path = fetch_path(search, file_content);
 	if (!path)
 		return (0);
-	(void)game;
-	(void)img;
-	(void)context;
-	printf("[%s] - [%s]\n", search, path);
-	// context = game->screen.mlx;
-	// *img = load(path, context);
-	// if (!img->content)
-	// {
-	// 	free(path);
-	// 	return (0);
-	// }
+	context = game->screen.mlx;
+	*img = load(path, context);
+	if (!img->content)
+	{
+		free(path);
+		return (0);
+	}
 	free(path);
 	return (1);
 }
