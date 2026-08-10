@@ -80,13 +80,13 @@ void	draw_sky_and_ground(t_ray *ray, t_game *game)
 	i = 0;
 	while (i < game->screen.height)
 	{
-		if (i <= ray->draw_end)
+		if (i < ray->draw_end)
 		{
 			color = game->textures.sky_color;
 			mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x,
 				i, color);
 		}
-		else if (i > ray->draw_end)
+		else if (i >= ray->draw_end)
 		{
 			color = game->textures.ground_color;
 			mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x,
