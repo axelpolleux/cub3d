@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/09 15:25:48 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/10 19:20:20 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/10 19:29:10 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	initialise_rules(t_rules *rules)
 {
-	rules->mov_speed = 10.0f;
+	rules->mov_speed = 7.0f;
 	rules->rot_speed = 3.0f;
-	return ;
 }
 
 void	initialise_screen(t_screen *screen)

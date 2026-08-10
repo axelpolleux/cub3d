@@ -47,4 +47,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean macrolibx all re build fclean
+.PHONY: clean all re build fclean
