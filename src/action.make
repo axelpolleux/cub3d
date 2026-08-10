@@ -4,7 +4,7 @@ ifdef SANIT
 	DEBUG=1
 endif
 ifdef DEBUG
-	CFLAGS += -g -Wall -Wextra -DDEBUG=yes
+	CFLAGS += -g -Wall -Wextra -DDEBUG=yes -O3
 else
 	CFLAGS := -Wall -Wextra -Werror
 endif
@@ -15,34 +15,36 @@ endif
 OBJ = $(SRC:%.c=$(OUTPUT_DIR)/%.o)
 
 $(NAME): $(OUT_DIRS) $(OBJ)
-	@$(CC) $(OBJ) $(CFLAGS) $(INCLUDES) $(LFLAGS) $(MLX_DIR)/libmlx.so $(LIBFT_DIR)/libft.a -lSDL2 -o $@
+	@$(CC) $(OBJ) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBFT_LIB) $(MLX_SHARE) -lSDL2 -o $@
 	@echo "COMPILATION"
 
 $(OUTPUT_DIR)/%.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDES) $(LFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo -e "$< to $@\n"
 
 $(OUT_DIRS):
 	@mkdir -p $(OUT_DIRS)
 
-all: $(NAME)
-
-macrolibx:
+$(MLX_SHARE):
 	make -C $(MLX_DIR) -j
 
-libft:
+$(LIBFT_LIB):
 	make -C $(LIBFT_DIR)
+
+all: $(LIBFT_LIB) $(MLX_SHARE) $(NAME)
 
 clean:
 	@rm -rf $(OUTPUT_DIR)
+	make clean -C $(LIBFT_DIR)
+	make clean -C $(MLX_DIR)
 	@echo "CLEAN"
 
 fclean: clean
 	@rm -f $(NAME)
+	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(MLX_DIR)
 	@echo "FCLEAN"
 
 re: fclean all
 
-build: macrolibx libft all
-
-.PHONY: clean macrolibx libft all re build fclean
+.PHONY: clean all re build fclean

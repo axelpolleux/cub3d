@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/10 19:19:46 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/04 16:16:30 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "struct.h"
+#include "key.h"
 
-int	init_game(t_game *game, char **file_content)
+void	keyup_hook(int keycode, void *game_ptr)
 {
-	if (!set_textures(game, file_content)
-		|| !set_map(game, file_content)
-		|| !set_colors(game, file_content))
-		return (0);
-	return (1);
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	game->key_table[keycode] = 0;
+}
+
+void	keydown_hook(int keycode, void *game_ptr)
+{
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	game->key_table[keycode] = 1;
+}
+
+void	window_hook(int event, void *game_ptr)
+{
+	t_game	*game;
+
+	game = (t_game *)game_ptr;
+	if (!event)
+		mlx_loop_end(game->screen.mlx);
 }
