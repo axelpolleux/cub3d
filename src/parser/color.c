@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 19:58:38 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:47:37 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,36 @@ int	*fetch_colors(char *str, char **content)
 	i = 0;
 	res = ft_calloc(3, sizeof(int));
 	base = fetch_path(str, content);
+	if (!base)
+	{
+		free(base);
+		free(res);
+		return (0);
+	}
 	s_base = ft_split(base, ',');
 	while (s_base[i] && i < 3)
 	{
 		res[i] = ft_atoi(s_base[i]);
 		i++;
 	}
+	free(base);
+	free_tab(&s_base);
 	return (res);
 }
 
 int	set_colors(t_game *game, char **file_content)
 {
-	int	*base;
+	int			*color;
+	t_texture	*base;
 
-	base = fetch_colors("F", file_content);
-	printf("---Floor color---\n"
-					"Red: %d\n"
-					"Green: %d\n"
-					"Blue: %d\n", base[0], base[1], base[2]);
-
-	base = fetch_colors("C", file_content);
-	printf("---Sky color---\n"
-					"Red: %d\n"
-					"Green: %d\n"
-					"Blue: %d\n", base[0], base[1], base[2]);
-
-	(void)game;
-	(void)file_content;
+	base = &game->textures;
+	color = fetch_colors("F", file_content);
+	if (!color)
+		return (error("Not found floor color\n/ᐠ ╥ ˕ ╥マ"));
+	base->sky_color = (mlx_color){.r = color[0], .g = color[1],
+		.b = color[2], .a = 0xff};
+	free(color);
+	color = fetch_colors("C", file_content);
+	free(color);
 	return (1);
 }
