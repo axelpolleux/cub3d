@@ -1,4 +1,4 @@
-INIT_PATH = src/key
+INIT_PATH = src/init
 
 SRC +=	$(INIT_PATH)/initialise.c
 

@@ -6,11 +6,11 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 19:20:20 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/10 19:20:28 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:29:10 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
+#include "initialise.h"
 
 void	initialise_rules(t_rules *rules)
 {

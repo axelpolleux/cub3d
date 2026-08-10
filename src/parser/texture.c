@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 14:03:07 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/10 17:36:58 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:34:38 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,11 @@ t_image	load(char *path, mlx_context mlx)
 int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 {
 	char		*path;
-	mlx_context	context;
 
 	path = fetch_path(search, file_content);
 	if (!path)
 		return (0);
-	context = game->screen.mlx;
-	*img = load(path, context);
+	*img = load(path, game->screen.mlx);
 	if (!img->content)
 	{
 		free(path);
@@ -93,7 +91,7 @@ int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 
 int	set_textures(t_game *game, char **file_content)
 {
-	t_texture	*base;
+	t_textures	*base;
 
 	base = &game->textures;
 	if (!set_image(game, &base->north_face, "NO", file_content))

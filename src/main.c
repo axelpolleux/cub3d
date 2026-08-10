@@ -87,12 +87,12 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (!main_parser(argc, argv, &game))
-		return (1);
 	ft_bzero(&game, sizeof(t_game));
 	game.screen.mlx = mlx_init();
 	if (!game.screen.mlx)
     	return (1);
+	if (!main_parser(argc, argv, &game))
+		return (1);
 	bruteforce_map(&game);
 	initialise_game(&game);
 	launch_ray(&game);

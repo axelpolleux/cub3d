@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/10 18:27:48 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:26:38 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	*fetch_colors(char *str, char **content)
 int	set_colors(t_game *game, char **file_content)
 {
 	int			*color;
-	t_texture	*base;
+	t_textures	*base;
 
 	base = &game->textures;
 	color = fetch_colors("F", file_content);

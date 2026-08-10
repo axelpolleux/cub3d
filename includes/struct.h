@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/10 19:11:31 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:26:22 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef	struct s_image
 	int			height;
 }	t_image;
 
-typedef struct s_texture
+typedef struct s_textures
 {
 	mlx_color	ground_color;
 	mlx_color	sky_color;
@@ -45,7 +45,7 @@ typedef struct s_texture
 	t_image		south_face;
 	t_image		west_face;
 	t_image		east_face;
-}	t_texture;
+}	t_textures;
 
 typedef struct s_rules
 {
