@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "parser.h"
 #include "struct.h"
-#include "libft.h"
 
 int	error(char *str)
 {
@@ -22,7 +22,7 @@ int	error(char *str)
 	return (0);
 }
 
-static	int	check_args(int ac)
+static int	check_args(int ac)
 {
 	if (ac > 2)
 		return (error("ヽ༼ຈʖ̯ຈ༽ﾉ\nWOW calm down !!\nI just need one argument"));

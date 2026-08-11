@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 16:30:44 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/07 16:46:10 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:04:12 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	draw_wall(t_game *game, t_ray *ray, int tex_x, t_image image)
 	float		step;
 
 	step = 1.0 * image.height / ray->line_height;
-	tex_pos = (ray->draw_start - game->screen.height
-			/ 2 + ray->line_height / 2) * step;
+	tex_pos = (ray->draw_start - game->screen.height / 2 + ray->line_height / 2)
+		* step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
@@ -32,8 +32,7 @@ void	draw_wall(t_game *game, t_ray *ray, int tex_x, t_image image)
 		tex_pos += step;
 		color = mlx_get_image_pixel(game->screen.mlx, image.content, tex_x,
 				tex_y);
-		mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x, y,
-			color);
+		game->screen.frame_buffer[ray->pos_x * game->screen.height + y] = color;
 		y++;
 	}
 }
@@ -52,9 +51,9 @@ void	load_good_texture(t_game *game, t_ray *ray, t_image *image)
 
 void	calculate_and_draw_wall(t_game *game, t_ray *ray)
 {
-	float		wall_x;
-	t_image		image;
-	int			tex_x;
+	float	wall_x;
+	t_image	image;
+	int		tex_x;
 
 	load_good_texture(game, ray, &image);
 	if (ray->side == 0)
@@ -83,14 +82,14 @@ void	draw_sky_and_ground(t_ray *ray, t_game *game)
 		if (i < ray->draw_end)
 		{
 			color = game->textures.sky_color;
-			mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x,
-				i, color);
+			game->screen.frame_buffer[ray->pos_x * game->screen.height
+				+ i] = color;
 		}
 		else if (i >= ray->draw_end)
 		{
 			color = game->textures.ground_color;
-			mlx_set_image_pixel(game->screen.mlx, game->screen.img, ray->pos_x,
-				i, color);
+			game->screen.frame_buffer[ray->pos_x * game->screen.height
+				+ i] = color;
 		}
 		i++;
 	}
@@ -98,7 +97,7 @@ void	draw_sky_and_ground(t_ray *ray, t_game *game)
 
 void	draw_line(t_ray *ray, t_game *game)
 {
-	int			h;
+	int	h;
 
 	h = game->screen.height;
 	ray->line_height = round(h / ray->perp_wall_dist);

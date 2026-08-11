@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/10 19:26:22 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:09:51 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_map
 	int						height;
 }							t_map;
 
-typedef	struct s_image
+typedef struct s_image
 {
 	mlx_image	content;
 	int			width;
@@ -79,7 +79,7 @@ typedef struct s_screen
 	mlx_context				mlx;
 	mlx_window_create_info	win_info;
 	mlx_window				win;
-	mlx_image				img;
+	mlx_image				draw_img;
 	int						height;
 	int						width;
 	mlx_color				*frame_buffer;

@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 19:20:20 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/10 19:29:10 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:02:19 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ void	initialise_rules(t_rules *rules)
 
 void	initialise_screen(t_screen *screen)
 {
-	screen->width = 720;
-	screen->height = 480;
-	screen->img = mlx_new_image(screen->mlx, screen->width, screen->height);
+	screen->width = 1920;
+	screen->height = 1080;
+	screen->draw_img = mlx_new_image(screen->mlx, screen->height,
+			screen->width);
 	screen->win_info = (mlx_window_create_info){0};
 	screen->win_info.title = "cubi3D";
 	screen->win_info.width = screen->width;
 	screen->win_info.height = screen->height;
+	screen->frame_buffer = ft_calloc(screen->width * screen->height,
+			sizeof(mlx_color));
 	screen->win = mlx_new_window(screen->mlx, &screen->win_info);
 }
 

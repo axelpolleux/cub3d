@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
 #include "libft.h"
+#include "parser.h"
 
 int	*fetch_colors(char *str, char **content)
 {
@@ -49,14 +49,14 @@ int	set_colors(t_game *game, char **file_content)
 	color = fetch_colors("F", file_content);
 	if (!color)
 		return (error("Not found floor color\n/ᐠ ╥ ˕ ╥マ"));
-	base->sky_color = (mlx_color){.r = color[0], .g = color[1],
-		.b = color[2], .a = 0xff};
+	base->sky_color = (mlx_color){.r = color[0], .g = color[1], .b = color[2],
+		.a = 0xff};
 	free(color);
 	color = fetch_colors("C", file_content);
 	if (!color)
 		return (error("Not  found sky color\n(⌐⊙_⊙)\n凸  凸"));
-	base->sky_color = (mlx_color){.r = color[0], .g = color[1],
-		.b = color[2], .a = 0xff};
+	base->sky_color = (mlx_color){.r = color[0], .g = color[1], .b = color[2],
+		.a = 0xff};
 	free(color);
 	return (1);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/06 16:40:40 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/09 14:56:24 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/11 14:33:56 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/11 14:33:57 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define RENDERER_H
 
 # include "libft.h"
-# include "math.h"
+# include <math.h>
+# include "utils.h"
 # include <sys/time.h>
 # include "mlx_extended.h"
 # include "struct.h"
