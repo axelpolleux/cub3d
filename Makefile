@@ -25,5 +25,6 @@ include		src/parser/parser.make
 include		src/renderer/renderer.make
 include		src/init/init.make
 include		src/key/key.make
+include		src/utils/utils.make
 
 include		src/action.make

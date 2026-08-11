@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/11 15:40:37 by lchamard         ###   ########.fr       */
+/*   Created: 2026/08/11 18:09:32 by lchamard          #+#    #+#             */
+/*   Updated: 2026/08/11 18:09:32 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "struct.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int	init_game(t_game *game, char **file_content)
-{
-	if (!set_textures(game, file_content) || !set_colors(game, file_content)
-		|| !set_map(game, file_content))
-		return (0);
-	return (1);
-}
+# include "mlx.h"
+
+mlx_color	complement(mlx_color color);
+
+#endif

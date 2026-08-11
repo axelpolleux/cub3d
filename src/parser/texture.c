@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "mlx.h"
 #include "parser.h"
 #include "struct.h"
-#include "mlx.h"
 
 char	*fetch_path(char *str, char **content)
 {
@@ -57,14 +57,14 @@ char	*fetch_path(char *str, char **content)
 
 t_image	load(char *path, mlx_context mlx)
 {
-	int			fd;
-	t_image		img;
+	int		fd;
+	t_image	img;
 
 	fd = open(path, O_RDONLY);
 	if (fd > 0)
 	{
-		img.content = mlx_new_image_from_file(mlx, path,
-				&img.width, &img.height);
+		img.content = mlx_new_image_from_file(mlx, path, &img.width,
+				&img.height);
 		close(fd);
 	}
 	else
@@ -74,7 +74,7 @@ t_image	load(char *path, mlx_context mlx)
 
 int	set_image(t_game *game, t_image *img, char *search, char **file_content)
 {
-	char		*path;
+	char	*path;
 
 	path = fetch_path(search, file_content);
 	if (!path)
