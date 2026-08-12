@@ -6,13 +6,13 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 15:59:47 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:53:18 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "parser.h"
 #include "struct.h"
+#include "libft.h"
 
 int	error(char *str)
 {
@@ -22,7 +22,7 @@ int	error(char *str)
 	return (0);
 }
 
-static int	check_args(int ac)
+static	int	check_args(int ac)
 {
 	if (ac > 2)
 		return (error("ヽ༼ຈʖ̯ຈ༽ﾉ\nWOW calm down !!\nI just need one argument"));
@@ -47,9 +47,11 @@ void	free_tab(char ***tab)
 int	main_parser(int ac, char **av, t_game *game)
 {
 	int		fd;
+	int		start_map;
 	char	**file_content;
 	int		exit_code;
 
+	start_map = 0;
 	exit_code = 1;
 	if (!check_args(ac) || !check_file(av) || !check_folder(av))
 		return (0);
@@ -63,7 +65,8 @@ int	main_parser(int ac, char **av, t_game *game)
 		free_tab(&file_content);
 		return (error("Where is the content ?\n(ㆆ _ ㆆ)"));
 	}
-	if (!init_game(game, file_content))
+	if (!check_keys(file_content, &start_map)
+		|| !init_game(game, file_content))
 		exit_code = 0;
 	free_tab(&file_content);
 	return (exit_code);

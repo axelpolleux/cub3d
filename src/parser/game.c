@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 14:59:07 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/11 15:40:37 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:50:45 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 int	init_game(t_game *game, char **file_content)
 {
-	if (!set_textures(game, file_content) || !set_colors(game, file_content)
+	if (!set_textures(game, file_content)
+		|| !set_colors(game, file_content)
 		|| !set_map(game, file_content))
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/10 19:26:38 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:33:45 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	set_colors(t_game *game, char **file_content)
 	color = fetch_colors("F", file_content);
 	if (!color)
 		return (error("Not found floor color\n/ᐠ ╥ ˕ ╥マ"));
-	base->sky_color = (mlx_color){.r = color[0], .g = color[1], .b = color[2],
+	base->ground_color = (mlx_color){.r = color[0], .g = color[1], .b = color[2],
 		.a = 0xff};
 	free(color);
 	color = fetch_colors("C", file_content);
 	if (!color)
-		return (error("Not  found sky color\n(⌐⊙_⊙)\n凸  凸"));
+		return (error("Not  found sky color\n(⌐⊙_⊙)"));
 	base->sky_color = (mlx_color){.r = color[0], .g = color[1], .b = color[2],
 		.a = 0xff};
 	free(color);

@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/09 19:11:16 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:51:29 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		init_game(t_game *game, char **file_content);
 // checking game fundamentals
 int		check_file(char **av);
 int		check_folder(char **av);
+int		check_keys(char **file_content, int *start);
 
 // checking and setting graphical parts
 int		set_textures(t_game *game, char **file_content);
