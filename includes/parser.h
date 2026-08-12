@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/12 14:51:29 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/12 17:04:57 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		main_parser(int ac, char **av, t_game *game);
 int		error(char *str);
 
 // initialising ready-game for renderer
-int		init_game(t_game *game, char **file_content);
+int		init_game(int start_map, t_game *game, char **file_content);
 
 // checking game fundamentals
 int		check_file(char **av);
@@ -31,7 +31,7 @@ int		check_keys(char **file_content, int *start);
 
 // checking and setting graphical parts
 int		set_textures(t_game *game, char **file_content);
-int		set_map(t_game *game, char **file_content);
+int		set_map(int start_map, t_game *game, char **file_content);
 int		set_colors(t_game *game, char **file_content);
 
 // getting information from defined source

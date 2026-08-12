@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/12 14:53:18 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/12 17:07:07 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main_parser(int ac, char **av, t_game *game)
 		return (error("Where is the content ?\n(ㆆ _ ㆆ)"));
 	}
 	if (!check_keys(file_content, &start_map)
-		|| !init_game(game, file_content))
+		|| !init_game(10, game, file_content))
 		exit_code = 0;
 	free_tab(&file_content);
 	return (exit_code);
