@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:31:52 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/12 17:27:51 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/13 15:59:45 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 
 static	int	*translate(char *str)
 {
-	// integrer recuperation donnee ascii des enums
-	printf("%s", str);
-	return (NULL);
+	int	*res;
+
+	res = malloc(sizeof(int) * ft_strlen(str));
+	return (res);
 }
 
 int	set_map(int start_map, t_game *game, char **file_content)
 {
-	int	i;
+	int		i;
 	t_map	map;
 
 	i = 0;

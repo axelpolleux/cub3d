@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/12 17:16:21 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/13 10:47:50 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 typedef enum e_cell
 {
-	VOID = 53,
-	GROUND,
-	WALL
+	VOID = ' ',
+	GROUND = '0',
+	WALL = '1'
 }							t_cell;
 
 typedef struct s_map
