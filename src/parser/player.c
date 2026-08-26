@@ -6,8 +6,14 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 19:27:12 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/10 19:27:13 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/26 18:48:11 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	init_player(t_game *game, char str)
+{
+	(void)game;
+	(void)str;
+}
