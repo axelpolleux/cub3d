@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 18:09:13 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/11 18:09:14 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:45:22 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,6 @@
 #include "parser.h"
 #include "renderer.h"
 #include "struct.h"
-
-void	bruteforce_map(t_game *game)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	game->map = (t_map){.width = 200, .height = 200};
-	game->map.content = malloc(game->map.height * sizeof(int *));
-	while (y < game->map.height)
-	{
-		x = 0;
-		game->map.content[y] = malloc(game->map.width * sizeof(int));
-		while (x < game->map.width)
-		{
-			if (x == 0 || y == 0 || x == game->map.width - 1
-				|| y == game->map.height - 1)
-				game->map.content[y][x] = WALL;
-			else
-				game->map.content[y][x] = VOID;
-			x++;
-		}
-		y++;
-	}
-}
-
-void	free_map(t_game *game)
-{
-	int	y;
-
-	y = 0;
-	while (y < game->map.height)
-	{
-		free(game->map.content[y]);
-		y++;
-	}
-	free(game->map.content);
-}
 
 void	update(void *ptr_game)
 {
@@ -96,10 +58,9 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!main_parser(argc, argv, &game))
 		return (1);
-	bruteforce_map(&game);
 	initialise_game(&game);
 	launch_ray(&game);
 	main_loop(&game);
-	free_map(&game);
+	free(game.map.content);
 	return (0);
 }

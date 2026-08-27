@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 19:28:37 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/08 17:34:11 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:34:35 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	detect_collision(t_ray *ray, t_game *game)
 			ray->map_y -= ray->step_y;
 		ray->hit = 0;
 	}
-	else if (game->map.content[ray->map_y][ray->map_x] == WALL)
+	else if (game->map.content[ray->map_y * game->map.width + ray->map_x]
+		== WALL)
 		ray->hit = 1;
 }
 

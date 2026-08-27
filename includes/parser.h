@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/26 18:06:48 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:49:20 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "struct.h"
 # include "get_next_line.h"
+# include "libft.h"
 # include <fcntl.h>
 
 // main part for parser to get started
@@ -23,7 +24,7 @@ int		error(char *str);
 
 // initialising ready-game for renderer
 int		init_game(int start_map, t_game *game, char **file_content);
-void	init_player(t_game *game, char str);
+void	init_player(t_game *game, char c, int x, int y);
 
 // checking game fundamentals
 int		check_file(char **av);

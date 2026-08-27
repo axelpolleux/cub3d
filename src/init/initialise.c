@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 19:20:20 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/12 16:57:09 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:58:04 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,4 @@ void	initialise_game(t_game *game)
 	initialise_screen(&game->screen);
 	initialise_rules(&game->rules);
 	game->running = true;
-	game->camera = (t_camera){.pos_x = 3, .pos_y = 3, .dir_x = -1, .dir_y = 0,
-		.plan_x = 0, .plan_y = -0.66};
 }

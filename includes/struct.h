@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 18:38:03 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/13 10:47:50 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:20:57 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef enum e_cell
 
 typedef struct s_map
 {
-	int						**content;
+	int						*content;
 	int						width;
 	int						height;
 }							t_map;
