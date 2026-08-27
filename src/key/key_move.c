@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 18:18:30 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/11 13:39:18 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:50:09 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_wall(t_game *game, int x, int y)
 {
 	if (x < 0 || x >= game->map.width || y < 0 || y >= game->map.height)
 		return (true);
-	return (game->map.content[y][x] == WALL);
+	return (game->map.content[y * game->map.width + x] == WALL);
 }
 
 void	move_player(t_game *game, float move_x, float move_y)

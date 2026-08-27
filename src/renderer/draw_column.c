@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 16:30:44 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/11 18:04:12 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/27 13:15:02 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	draw_wall(t_game *game, t_ray *ray, int tex_x, t_image image)
 void	load_good_texture(t_game *game, t_ray *ray, t_image *image)
 {
 	if (ray->side == 0 && ray->step_x < 0)
-		*image = game->textures.south_face;
-	else if (ray->side == 0 && ray->step_x > 0)
-		*image = game->textures.north_face;
-	else if (ray->side == 1 && ray->step_y < 0)
 		*image = game->textures.west_face;
-	else if (ray->side == 1 && ray->step_y > 0)
+	else if (ray->side == 0 && ray->step_x > 0)
 		*image = game->textures.east_face;
+	else if (ray->side == 1 && ray->step_y < 0)
+		*image = game->textures.north_face;
+	else if (ray->side == 1 && ray->step_y > 0)
+		*image = game->textures.south_face;
 }
 
 void	calculate_and_draw_wall(t_game *game, t_ray *ray)
