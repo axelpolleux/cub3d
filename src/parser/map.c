@@ -101,8 +101,8 @@ static bool	allocate_map(int start_map, t_game *game, char **file_content)
 	width = 0;
 	while (file_content[height + start_map])
 	{
-		if (strlen(file_content[height + start_map]) > (unsigned long)width)
-			width = strlen(file_content[height + start_map]);
+		if (ft_strlen(file_content[height + start_map]) > (unsigned long)width)
+			width = ft_strlen(file_content[height + start_map]);
 		height++;
 	}
 	game->map = (t_map){.width = width, .height = height,
