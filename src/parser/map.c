@@ -1,98 +1,68 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::		::::::::   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
-/*													+:+ +:+			+:+	 */
-/*   By: apolleux <apolleux@student.1337.ma>		+#+  +:+		+#+		*/
-/*												+#+#+#+#+#+   +#+			*/
-/*   Created: 2026/08/05 14:31:52 by apolleux			#+#	#+#			 */
-/*   Updated: 2026/08/27 13:12:10 by lchamard         ###   ########.fr       */
-/*																			*/
+/*                                                    +:+ +:+         +:+     */
+/*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
+/*   Updated: 2026/08/27 16:17:59 by apolleux         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 #include "struct.h"
 
-static int	is_valid_tile(char tile)
+static int	define_cell(t_game *game, char c, int x, int y)
 {
-	return (tile == GROUND || tile == WALL);
-}
-
-static int	map_is_close(t_map *map)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < map->height)
+	if (c == ' ')
 	{
-		x = 0;
-		while (x < map->width)
-		{
-			if (map->content[y * map->width + x] == GROUND)
-			{
-				if (x == 0 || y == 0 || x == map->width - 1 || y == map->height
-					- 1)
-					return (0);
-				if (!is_valid_tile(map->content[(y - 1) * map->width + (x - 1)])
-					|| !is_valid_tile(map->content[(y - 1) * map->width + x])
-					|| !is_valid_tile(map->content[(y - 1) * map->width + (x
-							+ 1)]) || !is_valid_tile(map->content[y * map->width
-						+ (x - 1)]) || !is_valid_tile(map->content[y
-						* map->width + x]) || !is_valid_tile(map->content[y
-						* map->width + (x + 1)])
-					|| !is_valid_tile(map->content[(y + 1) * map->width + (x
-							- 1)]) || !is_valid_tile(map->content[(y + 1)
-						* map->width + x]) || !is_valid_tile(map->content[(y
-							+ 1) * map->width + (x + 1)]))
-					return (0);
-			}
-			x++;
-		}
-		y++;
+		game->map.content[y * game->map.width + x] = VOID;
+		return (1);
 	}
-	return (1);
+	else if (c == '1')
+	{
+		game->map.content[y * game->map.width + x] = WALL;
+		return (1);
+	}
+	else if (c == '0')
+	{
+		game->map.content[y * game->map.width + x] = GROUND;
+		return (1);
+	}
+	return (0);
 }
 
-static int	translate(t_game *game, char *str, bool *player_is_define, int y)
+static int	translate(t_game *game, char *str, int *player_is_define, int y)
 {
 	int	x;
-	int	*res;
 
 	x = 0;
-	res = game->map.content;
 	while (str && str[x])
 	{
-		if (str[x] == ' ')
-			res[y * game->map.width + x] = VOID;
-		else if (str[x] == '1')
-			res[y * game->map.width + x] = WALL;
-		else
+		if (!*player_is_define && !define_cell(game, str[x], x, y))
 		{
-			res[y * game->map.width + x] = GROUND;
-			if (str[x] != '0' && !*player_is_define)
-			{
-				*player_is_define = true;
-				init_player(game, str[x], x, y);
-			}
-			else if (str[x] != '0')
-			{
-				free(game->map.content);
-				return (0);
-			}
+			game->map.content[y * game->map.width + x] = GROUND;
+			*player_is_define = 1;
+			init_player(game, str[x], x, y);
+		}
+		else if (!define_cell(game, str[x], x, y))
+		{
+			free(game->map.content);
+			return (0);
 		}
 		x++;
 	}
 	while (x < game->map.width)
 	{
-		res[y * game->map.width + x] = VOID;
+		game->map.content[y * game->map.width + x] = VOID;
 		x++;
 	}
 	return (1);
 }
 
-static bool	allocate_map(int start_map, t_game *game, char **file_content)
+static int	allocate_map(int start_map, t_game *game, char **file_content)
 {
 	int	height;
 	int	width;
@@ -115,10 +85,10 @@ static bool	allocate_map(int start_map, t_game *game, char **file_content)
 int	set_map(int start_map, t_game *game, char **file_content)
 {
 	int		y;
-	bool	player_is_define;
+	int		player_is_define;
 
 	y = 0;
-	player_is_define = false;
+	player_is_define = 0;
 	if (!allocate_map(start_map, game, file_content))
 		return (0);
 	while (file_content[y + start_map])

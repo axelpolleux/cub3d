@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/27 12:49:20 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/27 16:17:53 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_player(t_game *game, char c, int x, int y);
 int		check_file(char **av);
 int		check_folder(char **av);
 int		check_keys(char **file_content, int *start);
+int		map_is_close(t_map *map);
 
 // checking and setting graphical parts
 int		set_textures(t_game *game, char **file_content);
