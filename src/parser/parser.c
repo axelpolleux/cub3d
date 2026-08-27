@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/13 15:58:24 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:03:57 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ void	free_tab(char ***tab)
 	int	i;
 
 	i = 0;
+	if (!tab || !*tab)
+		return ;
 	while ((*tab)[i])
 	{
 		free((*tab)[i]);
 		i++;
 	}
 	free(*tab);
+	*tab = NULL;
 }
 
 int	main_parser(int ac, char **av, t_game *game)
