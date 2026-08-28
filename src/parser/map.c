@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/27 16:17:59 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/28 14:43:10 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ int	set_map(int start_map, t_game *game, char **file_content)
 		return (0);
 	while (file_content[y + start_map])
 	{
+		printf("[%s]\n", file_content[y + start_map]);
+		if (ft_strlen(file_content[y + start_map]) <= 0)
+		{
+			free(game->map.content);
+			return (error("Empty line in your map\n╭(ʘ̆~◞౪◟~ʘ̆)╮"));
+		}
 		if (!translate(game, file_content[y + start_map], &player_is_define, y))
 			return (0);
 		y++;
