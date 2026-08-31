@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/27 16:17:53 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 17:38:38 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		*fetch_colors(char *str, char **content);
 char	**fetch_content(int fd);
 
 // utils functions for my parser
+int		len_tab(char **tab);
 void	free_tab(char ***tab);
 
 #endif

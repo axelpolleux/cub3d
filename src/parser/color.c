@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/12 15:51:01 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 18:20:36 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@ int	*fetch_colors(char *str, char **content)
 		return (0);
 	}
 	s_base = ft_split(base, ',');
+	if (!s_base || len_tab(s_base) != 3)
+		return (NULL);
 	while (s_base[i] && i < 3)
 	{
 		res[i] = ft_atoi(s_base[i]);
+		if (res[i] < 0 || res[i] > 255)
+			return (NULL);
 		i++;
 	}
 	free_tab(&s_base);

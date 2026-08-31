@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/28 14:43:10 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 15:39:37 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	set_map(int start_map, t_game *game, char **file_content)
 		return (0);
 	while (file_content[y + start_map])
 	{
-		printf("[%s]\n", file_content[y + start_map]);
 		if (ft_strlen(file_content[y + start_map]) <= 0)
 		{
 			free(game->map.content);

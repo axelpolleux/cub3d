@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 18:09:13 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/27 12:45:22 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/08/31 17:29:37 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv)
 	if (!main_parser(argc, argv, &game))
 		return (1);
 	initialise_game(&game);
-	launch_ray(&game);
 	main_loop(&game);
 	free(game.map.content);
 	return (0);

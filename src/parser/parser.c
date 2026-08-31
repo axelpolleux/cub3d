@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/28 14:07:29 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 18:02:29 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ static	int	check_args(int ac)
 	else if (ac < 2)
 		return (error("You don't wanna talk ?\n⊙ω⊙\nGive me one argument"));
 	return (1);
+}
+
+int	len_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return (0);
+	while (tab[i])
+		i++;
+	return (i);
 }
 
 void	free_tab(char ***tab)
@@ -54,7 +66,7 @@ int	main_parser(int ac, char **av, t_game *game)
 	char	**file_content;
 	int		exit_code;
 
-	start_map = 0;
+	start_map = 6;
 	exit_code = 1;
 	if (!check_args(ac) || !check_file(av) || !check_folder(av))
 		return (0);
@@ -69,7 +81,7 @@ int	main_parser(int ac, char **av, t_game *game)
 		return (error("Where is the content ?\n(ㆆ _ ㆆ)"));
 	}
 	if (!check_keys(file_content, &start_map)
-		|| !init_game(6, game, file_content))
+		|| !init_game(start_map, game, file_content))
 		exit_code = 0;
 	free_tab(&file_content);
 	return (exit_code);

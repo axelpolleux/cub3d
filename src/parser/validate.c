@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:59:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/26 16:54:59 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 18:02:09 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // 	}
 // 	return (-1);
 // }
-//
+
 // static int	is_blank(char *line)
 // {
 // 	int	i;
@@ -44,18 +44,9 @@
 
 int	check_keys(char **file_content, int *start)
 {
+
+
 	(void)file_content;
 	(void)start;
-	/*int		i;
-	char	**flags;
-
-	i = 0;
-	flags = (char *[]){"NO", "SO", "WE", "EA", "F", "C", NULL};
-	(void)start;
-	while (file_content[i])
-	{
-		printf("%s", file_content[i]);
-		i++;
-	}*/
 	return (1);
 }
