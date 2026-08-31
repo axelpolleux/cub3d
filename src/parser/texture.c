@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 14:03:07 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/31 18:21:02 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 19:16:45 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static char	*match_line(char *str, char *line)
 	res = NULL;
 	s_line = ft_split(line, ' ');
 	if (!s_line || len_tab(s_line) != 2)
+	{
+		free_tab(&s_line);
 		return (NULL);
+	}
 	if (s_line[0] && s_line[1] && ft_strlen(str) == ft_strlen(s_line[0])
 		&& ft_strncmp(str, s_line[0], ft_strlen(str)) == 0)
 	{

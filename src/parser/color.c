@@ -6,21 +6,38 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/31 18:20:36 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/08/31 19:32:56 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
+static int	fill_base(int **res, char ***s_base)
+{
+	int	i;
+
+	i = 0;
+	while ((*s_base)[i] && i < 3)
+	{
+		(*res)[i] = ft_atoi((*s_base)[i]);
+		if ((*res)[i] < 0 || (*res)[i] > 255)
+		{
+			free(*res);
+			free_tab(s_base);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	*fetch_colors(char *str, char **content)
 {
-	int		i;
 	int		*res;
 	char	*base;
 	char	**s_base;
 
-	i = 0;
 	res = ft_calloc(3, sizeof(int));
 	base = fetch_path(str, content);
 	if (!base)
@@ -30,17 +47,16 @@ int	*fetch_colors(char *str, char **content)
 		return (0);
 	}
 	s_base = ft_split(base, ',');
-	if (!s_base || len_tab(s_base) != 3)
-		return (NULL);
-	while (s_base[i] && i < 3)
-	{
-		res[i] = ft_atoi(s_base[i]);
-		if (res[i] < 0 || res[i] > 255)
-			return (NULL);
-		i++;
-	}
-	free_tab(&s_base);
 	free(base);
+	if (!s_base || len_tab(s_base) != 3)
+	{
+		free_tab(&s_base);
+		free(res);
+		return (NULL);
+	}
+	if (!fill_base(&res, &s_base))
+		return (0);
+	free_tab(&s_base);
 	return (res);
 }
 
