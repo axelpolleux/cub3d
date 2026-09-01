@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 19:27:12 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/27 13:16:33 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/01 11:29:19 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_player(t_game *game, char c, int x, int y)
 		game->camera.dir_x = 1;
 		game->camera.plan_y = 0.66;
 	}
-	else if (c == 'O')
+	else if (c == 'W')
 	{
 		game->camera.dir_x = -1;
 		game->camera.plan_y = -0.66;
