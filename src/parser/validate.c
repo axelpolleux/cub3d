@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:59:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/31 19:19:46 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/01 18:07:57 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,47 @@
 // 	return (1);
 // }
 
+/*static int	is_map(char **file_content)
+{
+	// checker les lignes où il y a uniquement des '1' et/ou '0'
+	(void)file_content;
+	return (1);
+}*/
+
+static int	is_double(char **file_content)
+{
+	int		i;
+	int		j;
+	char	**s_line;
+	char	**sj_line;
+
+	i = 0;
+	while (file_content[i])
+	{
+		s_line = ft_split(file_content[i], ' ');
+		if (!s_line)
+			return (1);
+		j = i + 1;
+		while (file_content[j])
+		{
+			sj_line = ft_split(file_content[j], ' ');
+			if (!sj_line)
+				return (0);
+			if (!ft_strncmp(s_line[0], sj_line[0], ft_strlen(s_line[0])))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	check_keys(char **file_content, int *start)
 {
-	(void)file_content;
 	(void)start;
+	if (!is_double(file_content))
+		return (error("A keyword is duplicated in your file\n(-_(-_-)_-)"));
+	/*if (!is_map(file_content))
+		return (error("Where is your map ?\nò_ô"));*/
 	return (1);
 }
