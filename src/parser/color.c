@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/31 19:32:56 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/01 11:35:21 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	fill_base(int **res, char ***s_base)
 	int	i;
 
 	i = 0;
+	*res = ft_calloc(3, sizeof(int));
 	while ((*s_base)[i] && i < 3)
 	{
 		(*res)[i] = ft_atoi((*s_base)[i]);
@@ -38,12 +39,10 @@ int	*fetch_colors(char *str, char **content)
 	char	*base;
 	char	**s_base;
 
-	res = ft_calloc(3, sizeof(int));
 	base = fetch_path(str, content);
 	if (!base)
 	{
 		free(base);
-		free(res);
 		return (0);
 	}
 	s_base = ft_split(base, ',');
@@ -51,7 +50,6 @@ int	*fetch_colors(char *str, char **content)
 	if (!s_base || len_tab(s_base) != 3)
 	{
 		free_tab(&s_base);
-		free(res);
 		return (NULL);
 	}
 	if (!fill_base(&res, &s_base))
