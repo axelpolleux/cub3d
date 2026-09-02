@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:38:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/31 18:02:29 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/02 16:25:01 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main_parser(int ac, char **av, t_game *game)
 	char	**file_content;
 	int		exit_code;
 
-	start_map = 6;
+	start_map = 0;
 	exit_code = 1;
 	if (!check_args(ac) || !check_file(av) || !check_folder(av))
 		return (0);
