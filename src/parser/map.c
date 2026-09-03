@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 14:51:29 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 15:08:17 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	translate(t_game *game, char *str, int *player_is_define, int y)
 				free(game->map.content);
 				return (error("Invalid character on the map"));
 			}
-
 		}
 		else if (!define_cell(game, str[x], x, y))
 		{
