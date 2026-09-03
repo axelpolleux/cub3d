@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:27:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 14:55:22 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 15:02:41 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**fetch_content(int fd)
 		}
 		free(line);
 	}
-	// TODO When there is an empty line in the file the split cut the line
 	res = ft_split(base, '\n');
 	free(base);
 	return (res);

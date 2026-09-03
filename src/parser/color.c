@@ -6,12 +6,26 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 14:18:29 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/01 11:35:21 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 15:23:15 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
+
+static	int	check_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static int	fill_base(int **res, char ***s_base)
 {
@@ -21,6 +35,12 @@ static int	fill_base(int **res, char ***s_base)
 	*res = ft_calloc(3, sizeof(int));
 	while ((*s_base)[i] && i < 3)
 	{
+		if (!check_digit((*s_base)[i]))
+		{
+			free(*res);
+			free_tab(s_base);
+			return (0);
+		}
 		(*res)[i] = ft_atoi((*s_base)[i]);
 		if ((*res)[i] < 0 || (*res)[i] > 255)
 		{
