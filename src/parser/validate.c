@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 16:59:06 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/02 18:26:34 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 10:58:21 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int	check_keys(char **file_content, int *start)
 		return (error("A keyword is duplicated in your file\n(-_(-_-)_-)"));
 	*start = 6;
 	if (!file_content[*start])
-		return (error("Where is your map ?\n\¯\\(°_o)/¯"));
+		return (error("Where is your map ?\n¯\\(°_o)/¯"));
 	return (1);
 }
