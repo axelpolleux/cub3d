@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 15:08:17 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 19:41:03 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static int	allocate_map(int start_map, t_game *game, char **file_content)
 	return (1);
 }
 
+// TODO on return 0 free all the texture
 int	set_map(int start_map, t_game *game, char **file_content)
 {
 	int		y;

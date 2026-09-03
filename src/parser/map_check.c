@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:16:41 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 19:22:39 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 19:39:15 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static int	verif_cell(t_map *map, int *x, int *y)
 	if (*x == 0 || *y == 0 || *x == map->width - 1
 		|| *y == map->height - 1)
 		return (0);
-	if (!is_valid_tile(map->content[(*y - 1) * map->width + (*x + 1)])
+	if (!is_valid_tile(map->content[(*y - 1) * map->width + (*x)])
 		|| !is_valid_tile(map->content[*y * map->width + (*x - 1)])
+		|| !is_valid_tile(map->content[*y * map->width + *x])
 		|| !is_valid_tile(map->content[*y * map->width + (*x + 1)])
 		|| !is_valid_tile(map->content[(*y + 1) * map->width + *x]))
 		return (0);
