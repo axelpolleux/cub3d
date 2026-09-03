@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 18:18:30 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/27 12:50:09 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 19:24:20 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,22 @@ static void	add_key_to_move(t_game *game, float *move_x, float *move_y)
 	float	frame_mov_speed;
 
 	frame_mov_speed = game->rules.mov_speed * game->delta_time;
-	if (game->key_table[KEY_W])
+	if (game->key_table[SDL_SCANCODE_W])
 	{
 		*move_x += game->camera.dir_x * frame_mov_speed;
 		*move_y += game->camera.dir_y * frame_mov_speed;
 	}
-	if (game->key_table[KEY_S])
+	if (game->key_table[SDL_SCANCODE_S])
 	{
 		*move_x -= game->camera.dir_x * frame_mov_speed;
 		*move_y -= game->camera.dir_y * frame_mov_speed;
 	}
-	if (game->key_table[KEY_A])
+	if (game->key_table[SDL_SCANCODE_A])
 	{
 		*move_x -= game->camera.plan_x * frame_mov_speed;
 		*move_y -= game->camera.plan_y * frame_mov_speed;
 	}
-	if (game->key_table[KEY_D])
+	if (game->key_table[SDL_SCANCODE_D])
 	{
 		*move_x += game->camera.plan_x * frame_mov_speed;
 		*move_y += game->camera.plan_y * frame_mov_speed;

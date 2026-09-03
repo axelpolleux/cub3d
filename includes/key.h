@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 17:32:11 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/05 17:32:11 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 19:30:28 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,9 @@
 # include "mlx.h"
 # include "renderer.h"
 # include "struct.h"
+# include <SDL2/SDL_scancode.h>
 # include <math.h>
 
-# define KEY_Q 20
-# define KEY_W 26
-# define KEY_E 8
-# define KEY_A 4
-# define KEY_S 22
-# define KEY_D 7
-# define KEY_ESCAPE 41
 # define WALL_DIST 0.2f
 
 void	key_move(t_game *game);

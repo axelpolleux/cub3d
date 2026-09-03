@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 18:09:13 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/31 17:29:37 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 19:30:53 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	main(int argc, char **argv)
 	if (!game.screen.mlx)
 		return (1);
 	if (!main_parser(argc, argv, &game))
+	{
+		mlx_destroy_context(game.screen.mlx);
 		return (1);
+	}
 	initialise_game(&game);
 	main_loop(&game);
 	free(game.map.content);

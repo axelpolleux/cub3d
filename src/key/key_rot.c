@@ -6,7 +6,7 @@
 /*   By: lchamard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 17:32:06 by lchamard          #+#    #+#             */
-/*   Updated: 2026/08/11 13:39:27 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 19:27:23 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	key_rot_q(t_game *game)
 	float	old_plan_x;
 	float	rot_speed;
 
-	if (game->key_table[KEY_Q])
+	if (game->key_table[SDL_SCANCODE_LEFT])
 	{
 		rot_speed = -game->rules.rot_speed * game->delta_time;
 		old_dir_x = game->camera.dir_x;
@@ -40,7 +40,7 @@ static void	key_rot_e(t_game *game)
 	float	old_plan_x;
 	float	rot_speed;
 
-	if (game->key_table[KEY_E])
+	if (game->key_table[SDL_SCANCODE_RIGHT])
 	{
 		rot_speed = game->rules.rot_speed * game->delta_time;
 		old_dir_x = game->camera.dir_x;

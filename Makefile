@@ -14,7 +14,7 @@ SRC			:= $(SRC_DIR)/main.c				\
 				$(GNL_DIR)/get_next_line.c		\
 				$(GNL_DIR)/get_next_line_utils.c
 
-LDFLAGS		:= -lm
+LDFLAGS		:= -lm -lSDL2
 
 INCLUDES	:= -Iincludes -I$(MLX_DIR)/includes	\
 						-I$(LIBFT_DIR)			\
