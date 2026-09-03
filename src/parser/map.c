@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 14:51:29 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 16:19:36 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ static int	define_cell(t_game *game, char c, int x, int y)
 	return (0);
 }
 
+static void	fill_void(t_game *game, int *x, int *y)
+{
+	while ((*x) < game->map.width)
+	{
+		game->map.content[(*y) * game->map.width + (*x)] = VOID;
+		(*x)++;
+	}
+}
+
 static int	translate(t_game *game, char *str, int *player_is_define, int y)
 {
 	int	x;
@@ -50,7 +59,6 @@ static int	translate(t_game *game, char *str, int *player_is_define, int y)
 				free(game->map.content);
 				return (error("Invalid character on the map"));
 			}
-
 		}
 		else if (!define_cell(game, str[x], x, y))
 		{
@@ -59,11 +67,7 @@ static int	translate(t_game *game, char *str, int *player_is_define, int y)
 		}
 		x++;
 	}
-	while (x < game->map.width)
-	{
-		game->map.content[y * game->map.width + x] = VOID;
-		x++;
-	}
+	fill_void(game, &x, &y);
 	return (1);
 }
 
