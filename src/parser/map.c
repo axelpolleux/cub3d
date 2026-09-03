@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 11:16:56 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 14:51:29 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ static int	translate(t_game *game, char *str, int *player_is_define, int y)
 		{
 			game->map.content[y * game->map.width + x] = GROUND;
 			*player_is_define = 1;
-			init_player(game, str[x], x, y);
+			if (!init_player(game, str[x], x, y))
+			{
+				free(game->map.content);
+				return (error("Invalid character on the map"));
+			}
+
 		}
 		else if (!define_cell(game, str[x], x, y))
 		{
 			free(game->map.content);
-			return (0);
+			return (error("Invalid character on the map"));
 		}
 		x++;
 	}
@@ -78,7 +83,7 @@ static int	allocate_map(int start_map, t_game *game, char **file_content)
 	game->map = (t_map){.width = width, .height = height,
 		.content = malloc(width * height * sizeof(int))};
 	if (!game->map.content)
-		return (0);
+		return (error("Malloc fail on map allocation"));
 	return (1);
 }
 

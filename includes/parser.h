@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/31 17:38:38 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 14:52:12 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		error(char *str);
 
 // initialising ready-game for renderer
 int		init_game(int start_map, t_game *game, char **file_content);
-void	init_player(t_game *game, char c, int x, int y);
+int		init_player(t_game *game, char c, int x, int y);
 
 // checking game fundamentals
 int		check_file(char **av);
