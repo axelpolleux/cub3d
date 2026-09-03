@@ -6,12 +6,37 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:27:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 15:02:41 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 16:12:04 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+
+int	check_empty_line_map(char *base)
+{
+	int		is_in_map;
+	char	*str;
+
+	is_in_map = 0;
+	str = base;
+	while (*str)
+	{
+		if (!is_in_map && *str == '\n')
+		{
+			str++;
+			if (*str == ' ' || *str == '1')
+				is_in_map = 1;
+		}
+		if (is_in_map && *str == '\n' && *(str + 1) == '\n')
+		{
+			free(base);
+			return (error("Empty line on the map"));
+		}
+		str++;
+	}
+	return (1);
+}
 
 int	check_file(char **av)
 {
@@ -59,6 +84,8 @@ char	**fetch_content(int fd)
 		}
 		free(line);
 	}
+	if (!check_empty_line_map(base))
+		return (0);
 	res = ft_split(base, '\n');
 	free(base);
 	return (res);
