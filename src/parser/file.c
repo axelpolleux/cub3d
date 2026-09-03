@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:27:08 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 16:12:04 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/03 16:53:00 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,38 @@ int	check_folder(char **av)
 	return (1);
 }
 
-char	**fetch_content(int fd)
+int	get_file_content(char **base, int fd)
 {
-	char	*base;
 	char	*line;
-	char	**res;
 
-	res = 0;
-	base = ft_strdup("");
-	if (!base)
-		return (0);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		base = ft_strjoin(base, line);
-		base = ft_strjoin(base, "\n");
-		if (!base)
+		*base = ft_strjoin(*base, line);
+		*base = ft_strjoin(*base, "\n");
+		if (!(*base))
 		{
 			free(line);
 			return (0);
 		}
 		free(line);
 	}
+	return (1);
+}
+
+char	**fetch_content(int fd)
+{
+	char	*base;
+	char	**res;
+
+	res = 0;
+	base = ft_strdup("");
+	if (!base)
+		return (0);
+	if (!get_file_content(&base, fd))
+		return (0);
 	if (!check_empty_line_map(base))
 		return (0);
 	res = ft_split(base, '\n');
