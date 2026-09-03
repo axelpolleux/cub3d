@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 16:16:41 by apolleux          #+#    #+#             */
-/*   Updated: 2026/08/27 16:18:08 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/03 14:48:10 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	map_is_close(t_map *map)
 			if (map->content[y * map->width + x] == GROUND)
 			{
 				if (!verif_cell(map, &x, &y))
-					return (0);
+					return (error("Map isn't close"));
 			}
 			x++;
 		}
