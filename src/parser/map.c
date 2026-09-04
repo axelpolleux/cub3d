@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/04 14:35:52 by apolleux         ###   ########.fr       */
+/*   Updated: 2026/09/04 15:09:10 by lchamard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ static int	fill_map(int *defined, int *map, char ***content,
 	{
 		if (!translate((*game), (*content)[y + (*map)],
 			&(*defined), y))
-		{
-			destroy_textures((*game));
 			return (0);
-		}
 		if (ft_strlen((*content)[y + (*map)]) <= 0)
 		{
 			free((*game)->map.content);
@@ -105,10 +102,14 @@ int	set_map(int start_map, t_game *game, char **file_content)
 		return (0);
 	}
 	if (!fill_map(&player_is_define, &start_map, &file_content, &game))
+	{
+		destroy_textures(game);
 		return (0);
+	}
 	if (!player_is_define || !map_is_close(&game->map))
 	{
 		free(game->map.content);
+		destroy_textures(game);
 		return (0);
 	}
 	return (1);
