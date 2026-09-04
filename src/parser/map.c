@@ -6,42 +6,13 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/27 13:26:59 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 19:41:03 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/04 14:35:52 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 #include "struct.h"
-
-static int	define_cell(t_game *game, char c, int x, int y)
-{
-	if (c == ' ')
-	{
-		game->map.content[y * game->map.width + x] = VOID;
-		return (1);
-	}
-	else if (c == '1')
-	{
-		game->map.content[y * game->map.width + x] = WALL;
-		return (1);
-	}
-	else if (c == '0')
-	{
-		game->map.content[y * game->map.width + x] = GROUND;
-		return (1);
-	}
-	return (0);
-}
-
-static void	fill_void(t_game *game, int *x, int *y)
-{
-	while ((*x) < game->map.width)
-	{
-		game->map.content[(*y) * game->map.width + (*x)] = VOID;
-		(*x)++;
-	}
-}
 
 static int	translate(t_game *game, char *str, int *player_is_define, int y)
 {
@@ -91,41 +62,50 @@ static int	allocate_map(int start_map, t_game *game, char **file_content)
 	return (1);
 }
 
-void destroy_textures(t_game *game)
+void	destroy_textures(t_game *game)
 {
-        mlx_destroy_image(game->screen.mlx, game->textures.north_face.content);
-        mlx_destroy_image(game->screen.mlx, game->textures.south_face.content);
-        mlx_destroy_image(game->screen.mlx, game->textures.east_face.content);
-        mlx_destroy_image(game->screen.mlx, game->textures.west_face.content);
+	mlx_destroy_image(game->screen.mlx, game->textures.south_face.content);
+	mlx_destroy_image(game->screen.mlx, game->textures.east_face.content);
+	mlx_destroy_image(game->screen.mlx, game->textures.north_face.content);
+	mlx_destroy_image(game->screen.mlx, game->textures.west_face.content);
 }
 
-// TODO on return 0 free all the texture
-int	set_map(int start_map, t_game *game, char **file_content)
+static int	fill_map(int *defined, int *map, char ***content,
+	t_game **game)
 {
-	int		y;
-	int		player_is_define;
+	int	y;
 
 	y = 0;
-	player_is_define = 0;
-	if (!allocate_map(start_map, game, file_content))
-{
-   destroy_textures(game);
-		return (0);
-}
-	while (file_content[y + start_map])
+	while ((*content)[y + (*map)])
 	{
-		if (ft_strlen(file_content[y + start_map]) <= 0)
+		if (!translate((*game), (*content)[y + (*map)],
+			&(*defined), y))
 		{
-			free(game->map.content);
+			destroy_textures((*game));
+			return (0);
+		}
+		if (ft_strlen((*content)[y + (*map)]) <= 0)
+		{
+			free((*game)->map.content);
 			return (error("Empty line in your map\n╭(ʘ̆~◞౪◟~ʘ̆)╮"));
 		}
-		if (!translate(game, file_content[y + start_map], &player_is_define, y))
-  {
-    destroy_textures(game);
-			return (0);
-  }
 		y++;
 	}
+	return (1);
+}
+
+int	set_map(int start_map, t_game *game, char **file_content)
+{
+	int		player_is_define;
+
+	player_is_define = 0;
+	if (!allocate_map(start_map, game, file_content))
+	{
+		destroy_textures(game);
+		return (0);
+	}
+	if (!fill_map(&player_is_define, &start_map, &file_content, &game))
+		return (0);
 	if (!player_is_define || !map_is_close(&game->map))
 	{
 		free(game->map.content);

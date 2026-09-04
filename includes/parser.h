@@ -6,7 +6,7 @@
 /*   By: apolleux <apolleux@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:43:10 by apolleux          #+#    #+#             */
-/*   Updated: 2026/09/03 14:52:12 by lchamard         ###   ########.fr       */
+/*   Updated: 2026/09/04 14:11:58 by apolleux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		error(char *str);
 // initialising ready-game for renderer
 int		init_game(int start_map, t_game *game, char **file_content);
 int		init_player(t_game *game, char c, int x, int y);
+int		define_cell(t_game *game, char c, int x, int y);
 
 // checking game fundamentals
 int		check_file(char **av);
@@ -45,5 +46,6 @@ char	**fetch_content(int fd);
 // utils functions for my parser
 int		len_tab(char **tab);
 void	free_tab(char ***tab);
+void	fill_void(t_game *game, int *x, int *y);
 
 #endif
