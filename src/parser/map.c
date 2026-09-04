@@ -91,6 +91,14 @@ static int	allocate_map(int start_map, t_game *game, char **file_content)
 	return (1);
 }
 
+void destroy_textures(t_game *game)
+{
+        mlx_destroy_image(game->screen.mlx, game->textures.north_face.content);
+        mlx_destroy_image(game->screen.mlx, game->textures.south_face.content);
+        mlx_destroy_image(game->screen.mlx, game->textures.east_face.content);
+        mlx_destroy_image(game->screen.mlx, game->textures.west_face.content);
+}
+
 // TODO on return 0 free all the texture
 int	set_map(int start_map, t_game *game, char **file_content)
 {
@@ -100,7 +108,10 @@ int	set_map(int start_map, t_game *game, char **file_content)
 	y = 0;
 	player_is_define = 0;
 	if (!allocate_map(start_map, game, file_content))
+{
+   destroy_textures(game);
 		return (0);
+}
 	while (file_content[y + start_map])
 	{
 		if (ft_strlen(file_content[y + start_map]) <= 0)
@@ -109,7 +120,10 @@ int	set_map(int start_map, t_game *game, char **file_content)
 			return (error("Empty line in your map\n╭(ʘ̆~◞౪◟~ʘ̆)╮"));
 		}
 		if (!translate(game, file_content[y + start_map], &player_is_define, y))
+  {
+    destroy_textures(game);
 			return (0);
+  }
 		y++;
 	}
 	if (!player_is_define || !map_is_close(&game->map))
