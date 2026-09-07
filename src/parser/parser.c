@@ -73,7 +73,7 @@ int	main_parser(int ac, char **av, t_game *game)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (error("I can't open your file\nskill issue !\n(ง •̀_•́)ง"));
-	file_content = fetch_content(fd);
+	file_content = fetch_content(fd, game);
 	close(fd);
 	if (!file_content || !file_content[0])
 	{

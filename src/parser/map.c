@@ -88,11 +88,18 @@ int	set_map(int start_map, t_game *game, char **file_content)
 	int		player_is_define;
 
 	player_is_define = 0;
+	if (!check_empty_line_map(game->base))
+		return (0);
 	if (!allocate_map(start_map, game, file_content))
 		return (0);
 	if (!fill_map(&player_is_define, &start_map, &file_content, &game))
 		return (0);
-	if (!player_is_define || !map_is_close(&game->map))
+	if (!player_is_define)
+	{
+		free(game->map.content);
+		return (error("I can't find your player\n(⊙＿⊙')"));
+	}
+	if (!map_is_close(&game->map))
 	{
 		free(game->map.content);
 		return (0);

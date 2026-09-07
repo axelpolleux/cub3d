@@ -103,6 +103,7 @@ typedef struct s_game
 	struct timeval			new_time;
 	struct timeval			old_time;
 	float					delta_time;
+	char					*base;
 	t_map					map;
 	t_rules					rules;
 	t_textures				textures;

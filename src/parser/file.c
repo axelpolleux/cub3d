@@ -28,13 +28,14 @@ int	check_empty_line_map(char *base)
 			if (*str == ' ' || *str == '1')
 				is_in_map = 1;
 		}
-		if (is_in_map && *str == '\n' && *(str + 1) == '\n')
+		if (is_in_map && *str && *str == '\n' && *(str + 1) == '\n')
 		{
 			free(base);
 			return (error("Empty line on the map"));
 		}
 		str++;
 	}
+	free(base);
 	return (1);
 }
 
@@ -81,7 +82,7 @@ int	get_file_content(char **base, int fd)
 	return (1);
 }
 
-char	**fetch_content(int fd)
+char	**fetch_content(int fd, t_game *game)
 {
 	char	*base;
 	char	**res;
@@ -92,9 +93,7 @@ char	**fetch_content(int fd)
 		return (0);
 	if (!get_file_content(&base, fd))
 		return (0);
-	if (!check_empty_line_map(base))
-		return (0);
 	res = ft_split(base, '\n');
-	free(base);
+	game->base = base;
 	return (res);
 }
