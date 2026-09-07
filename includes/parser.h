@@ -34,7 +34,7 @@ int		check_keys(char **file_content, int *start);
 int		map_is_close(t_map *map);
 
 // checking and setting graphical parts
-int     check_empty_line_map(char *base);
+int		check_empty_line_map(char *base);
 int		set_textures(t_game *game, char **file_content);
 int		set_map(int start_map, t_game *game, char **file_content);
 int		set_colors(t_game *game, char **file_content);
