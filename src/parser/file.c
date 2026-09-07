@@ -28,12 +28,13 @@ int	check_empty_line_map(char *base)
 			if (*str == ' ' || *str == '1')
 				is_in_map = 1;
 		}
-		if (is_in_map && *str && *str == '\n' && *(str + 1) == '\n')
+		else if (is_in_map && *str && *str == '\n' && *(str + 1) == '\n')
 		{
 			free(base);
 			return (error("Empty line on the map"));
 		}
-		str++;
+		else
+			str++;
 	}
 	free(base);
 	return (1);
